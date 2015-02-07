@@ -36,7 +36,7 @@ public class Recursion implements hw1{
     }
 
     public double sqrtHelper(double n, double guess){
-	if (Math.abs(guess * guess - n) < 0.0001){
+	if (Math.abs(guess * guess - n) < 0.0000000001){
 	    return guess;
 	}
 	return sqrtHelper(n, (n / guess + guess) / 2);

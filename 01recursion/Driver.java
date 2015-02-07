@@ -15,5 +15,8 @@ public class Driver{
 	System.out.println(r.sqrt(0));
 	System.out.println(r.sqrt(9));
 	System.out.println(r.sqrt(100));
+
+	System.out.println(r.sqrt(0.00000001));
+
     }
 }
