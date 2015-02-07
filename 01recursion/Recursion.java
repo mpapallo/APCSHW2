@@ -1,4 +1,4 @@
-public class Recursion{
+public class Recursion implements hw1{
     
     public String name(){
 	return "Papallo,Michaela";
