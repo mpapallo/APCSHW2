@@ -27,16 +27,19 @@ public class Recursion{
 	}
 	return fibHelper(n - 1, b, b + a);
     }
-    /*
+    
     public double sqrt(double n){
 	if (n < 0){
 	    throw new IllegalArgumentException();
 	}
-	return sqrtHelper(n, n/2);
+	return sqrtHelper(n, n / 2);
     }
 
     public double sqrtHelper(double n, double guess){
-	
+	if (Math.abs(guess * guess - n) < 0.0001){
+	    return guess;
+	}
+	return sqrtHelper(n, (n / guess + guess) / 2);
     }
-    */
+    
 }

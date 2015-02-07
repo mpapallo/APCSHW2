@@ -12,5 +12,9 @@ public class Driver{
 	System.out.println(r.fib(0));
 	System.out.println(r.fib(1));
 	System.out.println(r.fib(5));
+    
+	System.out.println(r.sqrt(0));
+	System.out.println(r.sqrt(9));
+
     }
 }
