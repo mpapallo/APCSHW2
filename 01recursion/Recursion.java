@@ -18,20 +18,25 @@ public class Recursion{
 	if (n < 0){
 	    throw new IllegalArgumentException();
 	}
-	if (n == 0){
-	    return 1;
-	}
-	return fibHelper(n, 1, 1);
+	return fibHelper(n, 0, 1);
     }
 
     public int fibHelper(int n, int a, int b){
-	if (n == 1){
-	    return b;
+	if (n == 0){
+	    return a;
 	}
 	return fibHelper(n - 1, b, b + a);
     }
+    /*
+    public double sqrt(double n){
+	if (n < 0){
+	    throw new IllegalArgumentException();
+	}
+	return sqrtHelper(n, n/2);
+    }
 
-    //public double sqrt(double n){
+    public double sqrtHelper(double n, double guess){
 	
-    //}
+    }
+    */
 }

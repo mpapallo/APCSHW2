@@ -8,11 +8,9 @@ public class Driver{
 	System.out.println(r.fact(1));
 	System.out.println(r.fact(2));
 	System.out.println(r.fact(5));
-	System.out.println("^should be 120");
 
 	System.out.println(r.fib(0));
 	System.out.println(r.fib(1));
 	System.out.println(r.fib(5));
-	System.out.println("^ should be 8");
     }
 }
