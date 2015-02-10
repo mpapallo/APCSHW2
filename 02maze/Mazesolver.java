@@ -103,10 +103,14 @@ public class Mazesolver{
 	}
 	if (maze[x][y] == ' '){
 	    //mark the floor with '@'
+	    maze[x][y] = '@';
 	    //try to move in all directions
+	    if (solve(x+1, y) || solve(x-1, y) || solve(x, y+1) || solve(x, y-1)){
+		return true;
+	    }
 	    //when that fails, replace '@' with '.'
+	    maze[x][y] =  '.';
 	}
-
 	return false;//by default the maze didn't get solved
     }
 
