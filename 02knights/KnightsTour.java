@@ -32,7 +32,7 @@ public class KnightsTour{
 	for (int y = 0; y < board.length; y ++){
 	    for (int x = 0; x < board[0].length; x ++){
 		if (board[y][x] < 10){
-		    ans += "  " + board[y][x];
+		    ans += " 0" + board[y][x];
 		}else{
 		    ans += " " + board[y][x];
 		}
