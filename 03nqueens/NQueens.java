@@ -1,0 +1,59 @@
+public class NQueens{
+    //constants for the class
+
+    //terminal specific character to clear screen , or hide/show cursor
+    final static String clear =  "\033[2J";
+    final static String hide =  "\033[?25l";
+    final static String show =  "\033[?25h";
+    //instance variable
+    private int[][]board;
+    //terminal specific character to move the cursor
+    private String go(int x,int y){
+	return ("\033[" + x + ";" + y + "H");
+    }
+ 
+    public void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+
+    public String name(){
+	return "papallo.michaela";
+    }
+
+    public String toString(){
+	String ans = "\n";
+	for (int y = 0; y < board.length; y ++){
+	    for (int x = 0; x < board[0].length; x ++){
+		ans += " " + board[y][x];
+	    }
+	    ans += "\n";
+	}
+	return hide + clear + go(0,0) + ans + "\n" + show;
+    }
+
+    public NQueens(int size){
+	board = new int[size][size];
+	for (int y = 0; y < size; y ++){
+	    for (int x = 0; x < size; x ++){
+		board[y][x] = 0;
+	    }
+	}
+    }
+    
+    public boolean solve(){
+	return solve(0);
+    }
+    
+    public boolean solve(int x){
+	return solve(x, 0, board.length);
+    }
+
+    public boolean solve(int startx, int starty, int numQueens){
+	
+    }
+
+}
