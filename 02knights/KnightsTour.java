@@ -24,7 +24,7 @@ public class KnightsTour{
     }
 
     public String name(){
-	return "Papallo,Michaela";
+	return "Papallo.Michaela";
     }
 
     public String toString(){
