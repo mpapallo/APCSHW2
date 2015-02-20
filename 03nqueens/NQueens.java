@@ -73,18 +73,19 @@ public class NQueens{
     }
 
     public boolean canPlaceQueen(int startx, int starty){
-	for (int x = 0; x < startx; x ++){
-	    if (board[starty][x] = 'Q'){
-		return false;
-	    }
-	}
 	for (int y = 0; y < starty; y ++){
-	    if (board[y][startx] = 'Q'){
-		return false;
+	    for (int x = 0; x < startx; x ++){
+		if (board[y][x] == 'Q'){
+		    if (y == starty ||
+			x == startx ||
+			Math.abs(startx - x) == Math.abs(starty - y)){
+			return false;
+		    }
+		}
 	    }
 	}
-	//check diagonal
-	return true;;
+	return true;
     }
+
 }
 
