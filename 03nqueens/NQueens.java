@@ -57,33 +57,52 @@ public class NQueens{
     }
 
     public boolean solve(int y, int numQueens){
-	if (y == board.length && numQueens == 0){
+	if (numQueens == 0){
 	    return true;
 	}
 	for (int x = 0; x < board.length; x ++){
+
 	    if (canPlaceQueen(x, y)){
+
 	        board[y][x] = 'Q';
+
 		if (solve(y + 1, numQueens - 1)){
 		    return true;
 		}
-		board[y][x] = 'Q';
+
+		board[y][x] = '_';
 	    }
 	}
+
 	return false;
     }
 
-    public boolean canPlaceQueen(int startx, int starty){
-	for (int y = 0; y < starty; y ++){
-	    for (int x = 0; x < startx; x ++){
-		if (board[y][x] == 'Q'){
-		    if (y == starty ||
-			x == startx ||
-			Math.abs(startx - x) == Math.abs(starty - y)){
-			return false;
-		    }
-		}
+    public boolean canPlaceQueen(int col, int row){
+	
+        for (int y = row; y >= 0; y --){
+	    if (board[y][col] == 'Q'){
+		return false;
 	    }
 	}
+	int x = col;
+	int y = row;
+	while(x >= 0 && y >= 0){
+	    if (board[y][x] == 'Q'){
+		return false;
+	    }
+	    x --;
+	    y --;
+	}
+	x = col;
+	y = row;
+        while(x < board.length && y >= 0){
+	    if (board[y][x] == 'Q'){
+		return false;
+	    }
+	    x++;
+	    y--;
+	}
+
 	return true;
     }
 
