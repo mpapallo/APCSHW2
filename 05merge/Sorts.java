@@ -27,10 +27,6 @@ public class Sorts{
 	}
     }
 
-    public static void mergesort(int[] m){
-        m = msh(m);
-    }
-
     public static int[] msh(int[] m){
 	if (m.length == 1){
 	    return m;
@@ -56,11 +52,11 @@ public class Sorts{
 	}
 	*/
 	System.out.println();
-	int[] test = new int[10];
-	for (int i = 0; i < 10; i ++){
-	    test[i] = 10 - i;
+	int[] test = new int[100];
+	for (int i = 0; i < 100; i ++){
+	    test[i] = 100 - i;
 	}
-	mergesort(test);
+	test = msh(test);
 	for (int i = 0; i < test.length; i ++){
 	    System.out.print(test[i] + ",");
 	}
