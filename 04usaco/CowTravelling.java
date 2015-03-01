@@ -6,7 +6,6 @@ public class CowTravelling{
     private File input;
     private Scanner scan;
     private String[][] map;
-    private int[][] coords;
     private int time, x1, y1, x2, y2;
 
     public CowTravelling(){
@@ -16,7 +15,6 @@ public class CowTravelling{
 	}catch(Exception e){}
 	map = new String[scan.nextInt()][scan.nextInt()];
 	time = scan.nextInt();
-	coords = new int[2][2];
 
 	for (int y = 0; y < map.length; y ++){
 	    for (int x = 0; x < map[0].length; x ++){
@@ -28,17 +26,25 @@ public class CowTravelling{
 	y1 = scan.nextInt() - 1;
 	x2 = scan.nextInt() - 1;
 	y2 = scan.nextInt() - 1;
+
+	/*
+	System.out.println(time);
+	System.out.println(x1);
+	System.out.println(y1);
+	System.out.println(x2);
+	System.out.println(y2);
+	*/
     }
 
     public int go(){
-        return go(x1, y1, time);
+        return go(x1 + 1, y1, time) + go(x1 - 1, y1, time) + go(x1, y1 + 1, time) + go(x1, y1 - 1, time);
     }
     
     public int go(int x, int y, int t){
 	if (x < 0 || x >= map[0].length || y < 0 || y >= map.length){
 	    return 0;
 	}
-        if (map[y][x].equals("*")){
+	if (map[y][x].equals("*")){
 	    return 0;
 	}
 	if (t == 0){
