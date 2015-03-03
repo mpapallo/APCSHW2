@@ -6,13 +6,14 @@ public class CowTravelling{
     private File input;
     private Scanner scan;
     private String[][] map;
-    private int time, x1, y1, x2, y2;
+    private int time, x1, y1, x2, y2, numWays;
 
     public CowTravelling(){
 	try{
 	    input = new File("ctravel.txt");
 	    scan = new Scanner(input);
 	}catch(Exception e){}
+
 	map = new String[scan.nextInt()][scan.nextInt()];
 	time = scan.nextInt();
 
@@ -27,35 +28,29 @@ public class CowTravelling{
 	x2 = scan.nextInt() - 1;
 	y2 = scan.nextInt() - 1;
 
-	/*
-	System.out.println(time);
-	System.out.println(x1);
-	System.out.println(y1);
-	System.out.println(x2);
-	System.out.println(y2);
-	*/
+	numWays = 0;
     }
 
     public int go(){
-        return go(x1 + 1, y1, time) + go(x1 - 1, y1, time) + go(x1, y1 + 1, time) + go(x1, y1 - 1, time);
+	go(x1, y1, time);
+	return numWays;
     }
     
-    public int go(int x, int y, int t){
+    public void go(int x, int y, int t){
 	if (x < 0 || x >= map[0].length || y < 0 || y >= map.length){
-	    return 0;
+	    return;
 	}
-	if (map[y][x].equals("*")){
-	    return 0;
+	if (t == 0 && x == x2 && y == y2){
+	    numWays ++;
+	    return;
 	}
-	if (t == 0){
-	    if (x == x2 && y == y2){
-		return 1;
-	    }else{
-		return 0;
-	    }
+	if (map[y][x].equals("*") || t == 0){
+	    return;
 	}
-	return go(x + 1, y, t - 1) + go(x - 1, y, t - 1) + 
-	    go(x, y + 1, t - 1) + go(x, y - 1, t - 1);
+	go(x + 1, y, t - 1);
+	go(x - 1, y, t - 1); 
+	go(x, y + 1, t - 1);
+	go(x, y - 1, t - 1);
     }
 
     public String toString(){
