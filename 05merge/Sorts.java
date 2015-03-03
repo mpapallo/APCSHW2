@@ -27,6 +27,13 @@ public class Sorts{
 	}
     }
 
+    public static void mergesort(int[] m){
+	int[] sorted = new int[m.length];
+	sorted = msh(m);
+        for (int i = 0; i < m.length; i ++){
+	    m[i] = sorted[i];
+	}
+    }
     public static int[] msh(int[] m){
 	if (m.length == 1){
 	    return m;
@@ -51,12 +58,12 @@ public class Sorts{
 	    System.out.print(c[x] + ",");
 	}
 	*/
-	System.out.println();
+	//System.out.println();
 	int[] test = new int[100];
 	for (int i = 0; i < 100; i ++){
 	    test[i] = 100 - i;
 	}
-	test = msh(test);
+        mergesort(test);
 	for (int i = 0; i < test.length; i ++){
 	    System.out.print(test[i] + ",");
 	}
