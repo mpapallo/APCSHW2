@@ -3,29 +3,28 @@ public class QuickSelect{
     
     private static Random rand = new Random();
 
+    public static void select(int[] ary, int n){
+	
+    }
+
     public static void partition(int[] ary, int si, int ei){
 	//randomly pick a pivot point, save its value
-	int pivot = rand.nextInt(ei + 1 - si) + si;
-
-	//testing:
-	//System.out.println(pivot);
-	//System.out.println();
-
+	int ri = rand.nextInt(ei + 1 - si) + si;
+	int pivot = ary[ri];
 	//make new array
 	int[] d = new int[ary.length];
-	int start = si;
 	int end = ei;
-	//for elements bwetween si and ei:
-	for (int i = si; i <= ei; i ++){
-	    if (ary[i] < ary[pivot]){
-		d[start] = ary[i];
-		start ++;
-	    }else if (ary[i] > ary[pivot]){
-	        d[end] = ary[i];
-		end --;
+	//for elements between si and ei:
+	for (int i = si; i <= end; i ++){
+	    if (ary[i] < pivot){
+		d[si] = ary[i];
+		si ++;
+	    }else if (ary[i] > pivot){
+	        d[ei] = ary[i];
+		ei --;
 	    }
 	}
-	d[start] = ary[pivot];
+	d[si] = pivot;
 	//copy over elements that aren't in range [si, ei]
 	//before:
 	for (int i = si - 1; i >= 0; i --){
@@ -34,11 +33,6 @@ public class QuickSelect{
 	//after:
 	for (int i = ei + 1; i < ary.length; i ++){
 	    d[i] = ary[i];
-	}
-	
-	//testing:
-	for (int i = 0; i < d.length; i ++){
-	    System.out.print(d[i] + ", ");
 	}
     }
 
