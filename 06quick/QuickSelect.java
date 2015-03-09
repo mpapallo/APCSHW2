@@ -70,8 +70,7 @@ public class QuickSelect{
 	}
 
 	//System.out.println(pivot);
-	//System.out.println(Arrays.toString(d));
-        
+	//System.out.println(Arrays.toString(d)); 
 	if (start == n - 1){
 	    return d[start];
 	}
