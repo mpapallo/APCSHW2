@@ -49,58 +49,16 @@ public class Sorts{
 	return merge(msh(first), msh(second));
     }
 
-    public static void quicksort(int[] a){
-	quicksort(a, 0, a.length - 1);
-    }
-    public static void quicksort(int[] a, int si, int ei){
-        if (s < e){
-	    int index = parition(a, si, ei);
-	    quicksort(a, si, index - 1);
-	    quicksort(a, index + 1, ei);
-	}
-    }
-
-    public static int parition(int[] a, int si, int ei){
-	int pi = rand.nextInt(ei + 1 - si) + si;
-	int pivot = ary[pi];
-	int end = ei;
-	int i = si;
-	while(i<=end && si!=ei){
-	    if(ary[i]<pivot){
-		int x = ary[i];
-		ary[i] = ary[si];
-		ary[si] = x;
-		si++;
-		if(x==pivot){
-		    pi = si;
-		}else if(ary[i]==pivot){
-		    pi = i;
-		}
-		i++;
-	    }else if(ary[i]>pivot){
-		int x = ary[i];
-		ary[i] = ary[ei];
-		ary[ei] = x;
-		ei--;
-		if(x==pivot){
-		    pi = ei;
-		}else if(ary[i]==pivot){
-		    pi = i;
-		}
-	    }else{
-		i++;
-	    }
-	}
-	int x = ary[si];
-	ary[si] = pivot;
-	ary[pi] = x;
-	//System.out.println(pivot);
-	//System.out.println(Arrays.toString(ary));
-	return pi;
-    }
-
     public static void main(String[] args){
 	/*
+	int[] a = {1, 3, 5, 7, 7, 9, 20};
+	int[] b = {1, 2, 4, 6, 8, 56};
+	int[]c = merge(a, b);
+        for (int x = 0; x < c.length; x ++){
+	    System.out.print(c[x] + ",");
+	}
+	*/
+	//System.out.println();
 	int[] test = new int[100];
 	for (int i = 0; i < 100; i ++){
 	    test[i] = 100 - i;
@@ -109,9 +67,6 @@ public class Sorts{
 	for (int i = 0; i < test.length; i ++){
 	    System.out.print(test[i] + ",");
 	}
-	*/
-
-
     }
 
 }
