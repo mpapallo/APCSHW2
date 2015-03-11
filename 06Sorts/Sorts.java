@@ -53,7 +53,7 @@ public class Sorts{
 	quicksort(a, 0, a.length - 1);
     }
     public static void quicksort(int[] a, int si, int ei){
-        if (s < e){
+        if (si < ei){
 	    int index = parition(a, si, ei);
 	    quicksort(a, si, index - 1);
 	    quicksort(a, index + 1, ei);
