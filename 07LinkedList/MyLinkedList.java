@@ -5,12 +5,33 @@ public class MyLinkedList{
     int size;
 
     public MyLinkedList(){
-	
+	head = new LNode(0);
+	now = new LNode(0);
+	size = 0;
+    }
+
+    public String toString(){
+	String list = "[";
+	now = head;
+	for (int i = 0; i < size; i ++){
+	    list += now.getData() + " ";
+	    now = now.getNext();
+	}
+	list += "]";
+	return list;
     }
 
     public void add(int value){
-	//base case size=0, set head to value
-	
+	LNode next = new LNode(value);
+	if (size == 0){
+	    head = next;
+	    now = head;
+	}else{
+	    for (int i = 0; i < size; i ++){
+		now = now.getNext();
+	    }
+	    now.setNext(next);
+	}
     }
 
     public int size(){
