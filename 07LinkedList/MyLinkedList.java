@@ -1,8 +1,8 @@
 public class MyLinkedList{
     
-    LNode head;
-    LNode now;
-    int size;
+    private LNode head;
+    private LNode now;
+    private int size;
 
     public MyLinkedList(){
 	head = new LNode(0);
@@ -36,8 +36,27 @@ public class MyLinkedList{
 	size ++;
     }
 
+    public void add(int index, int value){
+	if (index < 0 || index >= size){
+	    throw new IndexOutOfBoundsException();
+	}
+	if (index == size - 1){
+	    add(value);
+	}else{
+	    LNode add = new LNode(value);
+	    now = head;
+	    for (int i = 0; i < index - 1; i ++){
+		now = now.getNext();
+	    }
+	    LNode next = now.getNext();
+	    now.setNext(add);
+	    add.setNext(next);
+	    size ++;
+        }
+    }
+
     public void set(int index, int value){
-	if (index < 0 || index > size){
+	if (index < 0 || index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
 	now = head;
@@ -48,7 +67,7 @@ public class MyLinkedList{
     }
 
     public int get(int index){
-	if (index < 0 || index > size){
+	if (index < 0 || index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
 	now = head;
