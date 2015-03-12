@@ -27,15 +27,57 @@ public class MyLinkedList{
 	    head = next;
 	    now = head;
 	}else{
-	    for (int i = 0; i < size; i ++){
+	    now = head;
+	    for (int i = 0; i < size - 1; i ++){
 		now = now.getNext();
 	    }
 	    now.setNext(next);
 	}
+	size ++;
     }
+
+    public void set(int index, int value){
+	if (index < 0 || index > size){
+	    throw new IndexOutOfBoundsException();
+	}
+	now = head;
+	for (int i = 0; i < index; i ++){
+	    now = now.getNext();
+	}
+	now.setData(value);
+    }
+
+    public int get(int index){
+	if (index < 0 || index > size){
+	    throw new IndexOutOfBoundsException();
+	}
+	now = head;
+	for (int i = 0; i < index; i ++){
+	    now = now.getNext();
+	}
+	return now.getData();
+    }
+
+    public int indexOf(int value){
+	now = head;
+	for (int i = 0; i < size; i ++){
+	    if (now.getData() == value){
+		return i;
+	    }else{
+		now = now.getNext();
+	    }
+	}
+	return -1;
+    }
+
+    //REMOVE
 
     public int size(){
 	return size;
+    }
+
+    public void clear(){
+	size = 0;
     }
 
 }

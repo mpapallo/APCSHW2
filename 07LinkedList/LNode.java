@@ -19,8 +19,4 @@ public class LNode{
 	return next;
     }
     
-    public String toString(){
-	return "" + data;
-    }
-    
 }
