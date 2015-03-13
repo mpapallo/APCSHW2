@@ -1,12 +1,14 @@
 public class MyLinkedList{
     
     private LNode head;
+    private LNode tail;
     private LNode now;
     private int size;
 
     public MyLinkedList(){
 	head = new LNode(0);
 	now = new LNode(0);
+	tail = new LNode(0);
 	size = 0;
     }
 
@@ -25,13 +27,11 @@ public class MyLinkedList{
 	LNode next = new LNode(value);
 	if (size == 0){
 	    head = next;
+	    tail = head;
 	    now = head;
 	}else{
-	    now = head;
-	    for (int i = 0; i < size - 1; i ++){
-		now = now.getNext();
-	    }
-	    now.setNext(next);
+	    tail.setNext(next);
+	    tail = next;
 	}
 	size ++;
 	return true;
@@ -42,13 +42,20 @@ public class MyLinkedList{
 	    throw new IndexOutOfBoundsException();
 	}
 	LNode add = new LNode(value);
-	now = head;
-	for (int i = 0; i < index - 1; i ++){
-	    now = now.getNext();
+	if (index == 0){
+	    add.setNext(head);
+	    head = add;
+	}else if(index == size() - 1){
+	    add(value);
+	}else{
+	    now = head;
+	    for (int i = 0; i < index - 1; i ++){
+		now = now.getNext();
+	    }
+	    LNode next = now.getNext();
+	    now.setNext(add);
+	    add.setNext(next);
 	}
-	LNode next = now.getNext();
-	now.setNext(add);
-	add.setNext(next);
 	size ++;
 	return true;
 	
