@@ -1,8 +1,6 @@
 public class MyLinkedList<T>{
     
-    private LNode<T> head;
-    private LNode<T> tail;
-    private LNode<T> now;
+    private LNode<T> head, tail, now;
     private int size;
 
     public MyLinkedList(){
@@ -90,7 +88,7 @@ public class MyLinkedList<T>{
     public int indexOf(T value){
 	now = head;
 	for (int i = 0; i < size; i ++){
-	    if (now.getData() == value){
+	    if (now.getData().equals(value)){
 		return i;
 	    }else{
 		now = now.getNext();
@@ -135,6 +133,7 @@ public class MyLinkedList<T>{
     }
 
     public static void main(String[] args){
+	/*
 	MyLinkedList<Integer> l = new MyLinkedList<Integer>();
 	
 	System.out.println(l);
@@ -155,6 +154,37 @@ public class MyLinkedList<T>{
 	
 	l.add(1, 9);
 	System.out.println("add(1, 9) "  + l);
+
+	System.out.println("remove(1) " + l.remove(1));
+	System.out.println(l);
+
+	System.out.println("remove(0)" + l.remove(0));
+	System.out.println(l);
+
+	System.out.println("remove(1)" + l.remove(1));
+	System.out.println(l);
+	*/
+
+	MyLinkedList<String> l = new MyLinkedList<String>();
+	
+	System.out.println(l);
+	
+	l.add("a");
+	l.add("b");
+	l.add("c");
+
+	System.out.println(l);
+	
+	System.out.println("get(0) " + l.get(0));
+	System.out.println("get(2) " + l.get(2));
+
+	l.set(2, "d");
+	System.out.println("set(2, d) " + l);
+
+	System.out.println("indexOf(d) " + l.indexOf("d"));
+	
+	l.add(1, "e");
+	System.out.println("add(1, e) "  + l);
 
 	System.out.println("remove(1) " + l.remove(1));
 	System.out.println(l);
