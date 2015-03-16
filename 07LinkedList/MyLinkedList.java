@@ -1,15 +1,19 @@
-public class MyLinkedList{
+public class MyLinkedList<T>{
     
-    private LNode head;
-    private LNode tail;
-    private LNode now;
+    private LNode<T> head;
+    private LNode<T> tail;
+    private LNode<T> now;
     private int size;
 
     public MyLinkedList(){
-    	head = new LNode(0);
-    	tail = new LNode(0);
-    	now = new LNode(0);
+    	head = new LNode<T>();
+    	tail = new LNode<T>();
+    	now = new LNode<T>();
     	size = 0;
+    }
+
+    public String name(){
+	return "papallo.michaela";
     }
 
     public String toString(){
@@ -23,8 +27,8 @@ public class MyLinkedList{
 	return list;
     }
 
-    public boolean add(int value){
-	LNode next = new LNode(value);
+    public boolean add(T value){
+	LNode<T> next = new LNode<T>(value);
 	if (size == 0){
 	    head = next;
 	    tail = head;
@@ -37,11 +41,11 @@ public class MyLinkedList{
 	return true;
     }
 
-    public boolean add(int index, int value){
+    public boolean add(int index, T value){
 	if (index < 0 || index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
-	LNode add = new LNode(value);
+	LNode<T> add = new LNode<T>(value);
 	if (index == 0){
 	    add.setNext(head);
 	    head = add;
@@ -52,7 +56,7 @@ public class MyLinkedList{
 	    for (int i = 0; i < index - 1; i ++){
 		now = now.getNext();
 	    }
-	    LNode next = now.getNext();
+	    LNode<T> next = now.getNext();
 	    now.setNext(add);
 	    add.setNext(next);
 	}
@@ -61,7 +65,7 @@ public class MyLinkedList{
 	
     }
 
-    public void set(int index, int value){
+    public void set(int index, T value){
 	if (index < 0 || index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -72,7 +76,7 @@ public class MyLinkedList{
 	now.setData(value);
     }
 
-    public int get(int index){
+    public T get(int index){
 	if (index < 0 || index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -83,7 +87,7 @@ public class MyLinkedList{
 	return now.getData();
     }
 
-    public int indexOf(int value){
+    public int indexOf(T value){
 	now = head;
 	for (int i = 0; i < size; i ++){
 	    if (now.getData() == value){
@@ -95,11 +99,11 @@ public class MyLinkedList{
 	return -1;
     }
 
-    public int remove(int index){
+    public T remove(int index){
 	if (index < 0 || index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
-	LNode rem;
+	LNode<T> rem;
 	if (index == 0){
 	    rem = head;
 	    head = rem.getNext();
@@ -131,7 +135,7 @@ public class MyLinkedList{
     }
 
     public static void main(String[] args){
-	MyLinkedList l = new MyLinkedList();
+	MyLinkedList<Integer> l = new MyLinkedList<Integer>();
 	
 	System.out.println(l);
 	

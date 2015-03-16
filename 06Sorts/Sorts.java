@@ -2,6 +2,11 @@ import java.util.*;
 import java.io.*;
 public class Sorts{
 
+
+    public String name(){
+	return "papallo.michaela";
+    }
+
     public static int[] merge(int[] a, int[] b){
 	int[] c = new int[a.length + b.length];
         return mergeh(a, b, c, 0, 0, 0);
@@ -100,17 +105,6 @@ public class Sorts{
     }
 
     public static void main(String[] args){
-	/*
-	int[] test = new int[100];
-	for (int i = 0; i < 100; i ++){
-	    test[i] = 100 - i;
-	}
-        mergesort(test);
-	for (int i = 0; i < test.length; i ++){
-	    System.out.print(test[i] + ",");
-	}
-	*/
-
 
     }
 
