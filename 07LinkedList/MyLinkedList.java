@@ -1,5 +1,38 @@
-public class MyLinkedList<T>{
+import java.util.*;
+public class MyLinkedList<T> implements Iterable<T>{
     
+    private class MyLLIterator<T> implements Iterator{
+
+	private LNode<T> now;
+
+	public MyLLIterator(LNode<T> start){
+	    now = start;
+	}
+
+	public boolean hasNext(){
+	    return (now != null);
+	}
+
+	public T next(){
+	    if (hasNext()){
+		LNode<T> r = now;
+		now = now.getNext();
+		return r.getData();
+	    }else{
+		throw new NoSuchElementException();
+	    }
+	}
+	
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+
+    }
+
+    public Iterator<T> iterator(){
+	return new MyLLIterator<T>(head);
+    }
+
     private LNode<T> head, tail, now;
     private int size;
 
