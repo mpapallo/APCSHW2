@@ -1,7 +1,7 @@
 import java.util.*;
 public class MyLinkedList<T> implements Iterable<T>{
     
-    private class MyLLIterator<T> implements Iterator{
+    private class MyLLIterator<T> implements Iterator<T>{
 
 	private LNode<T> now;
 
@@ -178,6 +178,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 	for (String s: l){
 	    System.out.println(s);
 	}
+	l.remove(4);
+	System.out.println(l);
 
     }
 
