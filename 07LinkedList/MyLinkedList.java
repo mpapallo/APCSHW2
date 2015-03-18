@@ -80,7 +80,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if (index == 0){
 	    add.setNext(head);
 	    head = add;
-	}else if(index == size() - 1){
+	}else if(index == size()){
 	    add(value);
 	}else{
 	    now = head;
