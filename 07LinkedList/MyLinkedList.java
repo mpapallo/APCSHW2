@@ -166,67 +166,18 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
 
     public static void main(String[] args){
-	/*
-	MyLinkedList<Integer> l = new MyLinkedList<Integer>();
-	
-	System.out.println(l);
-	
-	l.add(3);
-	l.add(4);
-	l.add(5);
-
-	System.out.println(l);
-	
-	System.out.println("get(0) " + l.get(0));
-	System.out.println("get(2) " + l.get(2));
-
-	l.set(2, 6);
-	System.out.println("set(2, 6) " + l);
-
-	System.out.println("indexOf(6) " + l.indexOf(6));
-	
-	l.add(1, 9);
-	System.out.println("add(1, 9) "  + l);
-
-	System.out.println("remove(1) " + l.remove(1));
-	System.out.println(l);
-
-	System.out.println("remove(0)" + l.remove(0));
-	System.out.println(l);
-
-	System.out.println("remove(1)" + l.remove(1));
-	System.out.println(l);
-	*/
 
 	MyLinkedList<String> l = new MyLinkedList<String>();
-	
-	System.out.println(l);
 	
 	l.add("a");
 	l.add("b");
 	l.add("c");
-
+	l.add("d");
+	l.add("e");
 	System.out.println(l);
-	
-	System.out.println("get(0) " + l.get(0));
-	System.out.println("get(2) " + l.get(2));
-
-	l.set(2, "d");
-	System.out.println("set(2, d) " + l);
-
-	System.out.println("indexOf(d) " + l.indexOf("d"));
-	
-	l.add(1, "e");
-	System.out.println("add(1, e) "  + l);
-
-	System.out.println("remove(1) " + l.remove(1));
-	System.out.println(l);
-
-	System.out.println("remove(0)" + l.remove(0));
-	System.out.println(l);
-
-	System.out.println("remove(1)" + l.remove(1));
-	System.out.println(l);
+	for (String s: l){
+	    System.out.println(s);
+	}
 
     }
 
