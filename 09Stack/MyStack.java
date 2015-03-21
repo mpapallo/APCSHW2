@@ -12,7 +12,11 @@ public class MyStack<T>{
     }
 
     public void push(T value){
-	stack.add(value, 0);
+	if (empty()){
+	    stack.add(value);
+	}else{
+	    stack.add(0, value);
+	}
     }
 
     public T pop(){
@@ -33,5 +37,24 @@ public class MyStack<T>{
 	return stack.size() == 0;
     }
     
+
+    public static void main(String[]args){
+	
+	MyStack<String> stack = new MyStack<String>();
+	
+	stack.push("C");
+	stack.push("B");
+	stack.push("A");
+	System.out.println(stack.peek());
+	System.out.println(stack.pop());
+	System.out.println(stack.pop());
+	System.out.println(stack.pop());
+	if (stack.empty()){
+	    System.out.println("empty now");
+	}
+	
+	
+	
+    }
 
 }
