@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyQueue<T>{
     
     private MyLinkedList<T> queue;
@@ -11,14 +12,18 @@ public class MyQueue<T>{
     }
 
     public boolean enqueue(T value){
+	if (value == null){
+	    throw new NullPointerException();
+	}
 	return queue.add(value);
-	
     }
 
     public T dequeue(){
+	if (queue.size() == 0){
+	    throw new NoSuchElementException();
+	}
 	return queue.remove(0);
     }
-
 
     public static void main(String[] args){
 	MyQueue<String> q = new MyQueue<String>();

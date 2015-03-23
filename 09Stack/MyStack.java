@@ -12,6 +12,9 @@ public class MyStack<T>{
     }
 
     public T push(T value){
+	if (value == null){
+	    throw new NullPointerException();
+	}
 	if (empty()){
 	    stack.add(value);
 	}else{
