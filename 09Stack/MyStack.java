@@ -11,12 +11,13 @@ public class MyStack<T>{
 	return "papallo.michaela";
     }
 
-    public void push(T value){
+    public T push(T value){
 	if (empty()){
 	    stack.add(value);
 	}else{
 	    stack.add(0, value);
 	}
+	return value;
     }
 
     public T pop(){
