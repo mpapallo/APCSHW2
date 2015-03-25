@@ -21,6 +21,7 @@ public class MyDeque<T>{
 	    head = deq.length - 1;
 	}
 	deq[head] = value;
+	size ++;
     }
     public void addLast(T value){
 	if (size == deq.length){
@@ -31,6 +32,7 @@ public class MyDeque<T>{
 	    tail = 0;
 	}
 	deq[tail] = value;
+	size ++;
     }
 
     public void resize(){
@@ -56,9 +58,17 @@ public class MyDeque<T>{
     }
 
     public T removeFirst(){
-	
+	size --;
     }
     public T removeLast(){
-	
+	size --;
     }
+
+    public static void main(String[]args){
+	
+	MyDeque<String> d = new MyDeque<String>();
+	
+
+    }
+
 }
