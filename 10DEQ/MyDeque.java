@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyDeque<T>{
 
     private Object[] deq;
@@ -58,6 +59,10 @@ public class MyDeque<T>{
     }
 
     public T removeFirst(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+
 	size --;
 	T ret = (T)deq[head];
 	head ++;
@@ -67,6 +72,10 @@ public class MyDeque<T>{
 	return ret;
     }
     public T removeLast(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+
 	size --;
 	T ret = (T)deq[tail];
 	tail --;
@@ -77,16 +86,24 @@ public class MyDeque<T>{
     }
 
     public T getFirst(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+
 	return (T)deq[head];
     }
     public T getLast(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+
 	return (T)deq[tail];
     }
 
     public String toString(){
 	String ret = "[ ";
 	if (size > 0){
-	    if (head < tail){
+	    if (head <= tail){
 		for (int i = head; i <= tail; i ++){
 		    ret += deq[i] + " ";
 		}
@@ -108,6 +125,10 @@ public class MyDeque<T>{
 	System.out.println(d);
 	d.addFirst("a");
 	d.addLast("b");
+	System.out.println(d);
+	d.removeFirst();
+	System.out.println(d);
+	d.removeLast();
 	System.out.println(d);
     }
 
