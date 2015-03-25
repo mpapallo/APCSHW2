@@ -38,14 +38,14 @@ public class MyDeque<T>{
     public void resize(){
 	Object[] ret = new Object[deq.length * 2];
 	if (head < tail){
-	    for (int i = head; i < tail; i ++){
+	    for (int i = head; i <= tail; i ++){
 		ret[i] = deq[i];
 	    }
 	}else{
 	    for (int i = head; i < deq.length; i ++){
 		ret[i] = deq[i];
 	    }
-	    for (int i = 0; i < tail; i ++){
+	    for (int i = 0; i <= tail; i ++){
 		ret[i + deq.length] = deq[i];
 		tail += deq.length;
 	    }
@@ -83,11 +83,32 @@ public class MyDeque<T>{
 	return (T)deq[tail];
     }
 
+    public String toString(){
+	String ret = "[ ";
+	if (size > 0){
+	    if (head < tail){
+		for (int i = head; i <= tail; i ++){
+		    ret += deq[i] + " ";
+		}
+	    }else{
+		for (int i = head; i < deq.length; i ++){
+		    ret += deq[i] + " ";
+		}
+		for (int i = 0; i <= tail; i ++){
+		    ret += deq[i] + " ";
+		}
+	    }
+	}
+	return ret + "]";
+    }
+
     public static void main(String[]args){
 	
 	MyDeque<String> d = new MyDeque<String>();
-	
-
+	System.out.println(d);
+	d.addFirst("a");
+	d.addLast("b");
+	System.out.println(d);
     }
 
 }
