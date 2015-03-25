@@ -7,9 +7,9 @@ public class MyDeque<T>{
     private int size;
 
     public MyDeque(){
-	deq = new Object[5];
-	head = 3;
-	tail = 2;
+	deq = new Object[100];
+	head = 51;
+	tail = 50;
 	size = 0;
     }
 
@@ -54,11 +54,6 @@ public class MyDeque<T>{
 	//now copy into deq
         deq = ret;
     }
-    /*
-    public void copy(int[] a, int[] b){
-	
-    }
-    */
 
     public T removeFirst(){
 	if (size == 0){
