@@ -59,9 +59,28 @@ public class MyDeque<T>{
 
     public T removeFirst(){
 	size --;
+	T ret = (T)deq[head];
+	head ++;
+	if (head == deq.length){
+	    head = 0;
+	}
+	return ret;
     }
     public T removeLast(){
 	size --;
+	T ret = (T)deq[tail];
+	tail --;
+	if (tail == -1){
+	    tail = deq.length - 1;
+	}
+	return ret;
+    }
+
+    public T getFirst(){
+	return (T)deq[head];
+    }
+    public T getLast(){
+	return (T)deq[tail];
     }
 
     public static void main(String[]args){
