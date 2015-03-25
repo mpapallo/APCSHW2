@@ -7,9 +7,9 @@ public class MyDeque<T>{
     private int size;
 
     public MyDeque(){
-	deq = new Object[100];
-	head = 51;
-	tail = 50;
+	deq = new Object[5];
+	head = 3;
+	tail = 2;
 	size = 0;
     }
 
@@ -47,16 +47,18 @@ public class MyDeque<T>{
 		ret[i] = deq[i];
 	    }
 	    for (int i = 0; i <= tail; i ++){
-		ret[i + deq.length] = deq[i];
-		tail += deq.length;
+		ret[i + deq.length + 1] = deq[i];
+		tail += deq.length + 1;
 	    }
 	}
-	//now copy into deq D:
+	//now copy into deq
+        deq = ret;
     }
-
+    /*
     public void copy(int[] a, int[] b){
 	
     }
+    */
 
     public T removeFirst(){
 	if (size == 0){
@@ -89,14 +91,12 @@ public class MyDeque<T>{
 	if (size == 0){
 	    throw new NoSuchElementException();
 	}
-
 	return (T)deq[head];
     }
     public T getLast(){
 	if (size == 0){
 	    throw new NoSuchElementException();
 	}
-
 	return (T)deq[tail];
     }
 
@@ -125,11 +125,19 @@ public class MyDeque<T>{
 	System.out.println(d);
 	d.addFirst("a");
 	d.addLast("b");
+	d.addFirst("c");
+	d.addFirst("d");
+	d.addLast("e");
+	d.addLast("f");
+	d.addFirst("g");
 	System.out.println(d);
-	d.removeFirst();
-	System.out.println(d);
-	d.removeLast();
-	System.out.println(d);
+	//d.removeFirst();
+	//System.out.println(d);
+	//d.removeLast();
+	//System.out.println(d);
+	//System.out.println(d.getFirst());
+	//System.out.println(d.getLast());
+	
     }
 
 }
