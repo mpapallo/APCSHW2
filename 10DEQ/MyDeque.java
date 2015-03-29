@@ -13,6 +13,10 @@ public class MyDeque<T>{
 	size = 0;
     }
 
+    public String name(){
+	return "michaela.papallo";
+    }
+
     public void addFirst(T value){
 	if (size == deq.length){
 	    grow();
