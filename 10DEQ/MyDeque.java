@@ -7,9 +7,9 @@ public class MyDeque<T>{
     private int size;
 
     public MyDeque(){
-	deq = new Object[5];
-	head = 4;
-	tail = 3;
+	deq = new Object[10];
+	head = 5;
+	tail = 4;
 	size = 0;
     }
 
@@ -55,9 +55,35 @@ public class MyDeque<T>{
         deq = ret;
     }
 
+    public void shrink(){
+	Object[] ret = new Object[deq.length / 2];
+	int c = 0;
+	if (head < tail){
+	    for (int i = head; i <= tail; i ++){
+		ret[c] = deq[i];
+		c ++;
+	    }
+	}else{
+	    for (int i = head; i < deq.length; i ++){
+		ret[c] = deq[i];
+		c ++;
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		ret[c] = deq[i];
+	    }
+	}
+	head = 0;
+	tail = head + size - 1;
+	deq = ret;
+    }
+
     public T removeFirst(){
 	if (size == 0){
 	    throw new NoSuchElementException();
+	}
+
+	if (size <= deq.length / 4){
+	    shrink();
 	}
 
 	size --;
@@ -71,6 +97,10 @@ public class MyDeque<T>{
     public T removeLast(){
 	if (size == 0){
 	    throw new NoSuchElementException();
+	}
+
+	if (size <= deq.length / 4){
+	    shrink();
 	}
 
 	size --;
@@ -111,27 +141,13 @@ public class MyDeque<T>{
 		}
 	    }
 	}
-	return ret + "]";
+	return ret + "]" + "\n" + Arrays.toString(deq) + "\n";
     }
 
     public static void main(String[]args){
 	
 	MyDeque<String> d = new MyDeque<String>();
 	System.out.println(d);
-	d.addFirst("a");
-	d.addLast("b");
-	d.addFirst("c");
-	d.addFirst("d");
-	d.addLast("e");
-	d.addLast("f");
-	d.addFirst("g");
-	System.out.println(d);
-	//d.removeFirst();
-	//System.out.println(d);
-	//d.removeLast();
-	//System.out.println(d);
-	//System.out.println(d.getFirst());
-	//System.out.println(d.getLast());
 	
     }
 
