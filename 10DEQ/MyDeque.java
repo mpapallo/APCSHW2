@@ -7,15 +7,15 @@ public class MyDeque<T>{
     private int size;
 
     public MyDeque(){
-	deq = new Object[100];
-	head = 51;
-	tail = 50;
+	deq = new Object[5];
+	head = 4;
+	tail = 3;
 	size = 0;
     }
 
     public void addFirst(T value){
 	if (size == deq.length){
-	    resize();
+	    grow();
 	}	
 	head --;
 	if (head == -1){
@@ -26,7 +26,7 @@ public class MyDeque<T>{
     }
     public void addLast(T value){
 	if (size == deq.length){
-	    resize();
+	    grow();
 	}	
 	tail ++;
 	if (tail == deq.length){
@@ -36,7 +36,7 @@ public class MyDeque<T>{
 	size ++;
     }
 
-    public void resize(){
+    public void grow(){
 	Object[] ret = new Object[deq.length * 2];
 	if (head < tail){
 	    for (int i = head; i <= tail; i ++){
@@ -47,9 +47,9 @@ public class MyDeque<T>{
 		ret[i] = deq[i];
 	    }
 	    for (int i = 0; i <= tail; i ++){
-		ret[i + deq.length + 1] = deq[i];
-		tail += deq.length + 1;
+		ret[i + deq.length] = deq[i];
 	    }
+	    tail += deq.length;
 	}
 	//now copy into deq
         deq = ret;
