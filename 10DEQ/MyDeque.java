@@ -145,7 +145,7 @@ public class MyDeque<T>{
 		}
 	    }
 	}
-	return ret + "]" + "\n" + Arrays.toString(deq) + "\n";
+	return ret + "]";
     }
 
     public static void main(String[]args){
