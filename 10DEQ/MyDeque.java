@@ -77,7 +77,7 @@ public class MyDeque<T>{
 	    }
 	}
 	head = 0;
-	tail = head + size - 1;
+		c ++;
 	deq = ret;
     }
 
