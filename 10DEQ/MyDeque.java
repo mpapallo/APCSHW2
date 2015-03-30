@@ -5,12 +5,17 @@ public class MyDeque<T>{
     private int head;
     private int tail;  
     private int size;
+    private boolean shrink;
 
     public MyDeque(){
+	this(false);
+    }
+    public MyDeque(boolean b){
 	deq = new Object[10];
 	head = 5;
 	tail = 4;
 	size = 0;
+	shrink = b;
     }
 
     public String name(){
@@ -86,7 +91,7 @@ public class MyDeque<T>{
 	    throw new NoSuchElementException();
 	}
 
-	if (size <= deq.length / 4){
+	if (shrink && size <= deq.length / 4){
 	    shrink();
 	}
 
@@ -103,7 +108,7 @@ public class MyDeque<T>{
 	    throw new NoSuchElementException();
 	}
 
-	if (size <= deq.length / 4){
+	if (shrink && size <= deq.length / 4){
 	    shrink();
 	}
 
