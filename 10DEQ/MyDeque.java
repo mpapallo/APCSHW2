@@ -55,7 +55,6 @@ public class MyDeque<T>{
 	    }
 	    tail += deq.length;
 	}
-	//now copy into deq
         deq = ret;
     }
 
@@ -74,10 +73,11 @@ public class MyDeque<T>{
 	    }
 	    for (int i = 0; i <= tail; i ++){
 		ret[c] = deq[i];
+		c ++;
 	    }
 	}
 	head = 0;
-		c ++;
+	tail = c - 1;
 	deq = ret;
     }
 
