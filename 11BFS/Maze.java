@@ -5,24 +5,6 @@ public class Maze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
-    //need a queue, stack, or deque
-
-    private class Coord{
-	private int x;
-	private int y;
-	
-	public Coord(int x, int y){
-	    this.x = x;
-	    this.y = y;
-	}
-
-	public int getX(){
-	    return x;
-	}
-	public int getY(){
-	    return y;
-	}
-    }
 
     public Maze(String filename){
 	startx = -1;
@@ -58,7 +40,7 @@ public class Maze{
 		starty = i/maxx;
 	    }
 	}
-	
+
     }
 
     private String go(int x,int y){
@@ -103,6 +85,7 @@ public class Maze{
 	return ans;
     }
     public String toString(boolean animate){
+	if (animate){
 	    String ans = ""+maxx+","+maxy+"\n";
 	    for(int i=0;i<maxx*maxy;i++){
 		if(i%maxx ==0 && i!=0){
@@ -115,8 +98,25 @@ public class Maze{
 	    return toString();
 	}
     }
+    /*
+    public boolean solveBFS(){
+	return solveBFS(false);
+    }
+    public boolean solveDFS(){
+	return solveDFS(false);
+    }
 
+    public boolean solveBFS(boolean animate){
+	
+    }
+    public boolean solveDFS(boolean animate){
+
+    }
+    */
     public static void main(String[]args){
+	
+	Maze m = new Maze("data1.dat");
+	System.out.println(m);
 	
     }
 
