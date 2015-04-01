@@ -1,23 +1,15 @@
 public class Frontier{
     
-    private 
+    private MyDeque deq;
+    private int DFS = 0;
+    private int BFS = 1;
+    private int mode;
 
-    private class Coord{
-	private int x;
-	private int y;
-	
-	public Coord(int x, int y){
-	    this.x = x;
-	    this.y = y;
-	}
-
-	public int getX(){
-	    return x;
-	}
-	public int getY(){
-	    return y;
+    public Frontier(int mode){
+	this.mode = mode;
+	if (mode < 0 || mode > 1){
+	    this.mode = 1;
 	}
     }
-
 
 }

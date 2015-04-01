@@ -40,7 +40,6 @@ public class Maze{
 		starty = i/maxx;
 	    }
 	}
-
     }
 
     private String go(int x,int y){
@@ -98,6 +97,7 @@ public class Maze{
 	    return toString();
 	}
     }
+
     /*
     public boolean solveBFS(){
 	return solveBFS(false);
