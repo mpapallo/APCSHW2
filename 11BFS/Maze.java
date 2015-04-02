@@ -3,8 +3,9 @@ import java.io.*;
 public class Maze{
 
     private char[][]maze;
-    private int maxx,maxy;
+    private int maxx, maxy;
     private int startx,starty;
+    private Frontier solver;
 
     public Maze(String filename){
 	startx = -1;
@@ -98,21 +99,27 @@ public class Maze{
 	}
     }
 
-    /*
     public boolean solveBFS(){
 	return solveBFS(false);
     }
     public boolean solveDFS(){
 	return solveDFS(false);
     }
-
     public boolean solveBFS(boolean animate){
-	
+	solver = new Frontier(1);
+	return BFS(solver, startx, starty);
     }
     public boolean solveDFS(boolean animate){
+	solver = new Frontier(0);
+	return DFS(solver, startx, starty);
+    }
+    public boolean BFS(Frontier f, int x, int y){
+	
+    }
+    public boolean DFS(Frontier f, int x, int y){
 
     }
-    */
+
     public static void main(String[]args){
 	
 	Maze m = new Maze("data1.dat");

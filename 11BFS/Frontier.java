@@ -1,15 +1,24 @@
 public class Frontier{
     
-    private MyDeque deq;
+    private MyDeque<Coord> deq;
     private int DFS = 0;
     private int BFS = 1;
     private int mode;
 
     public Frontier(int mode){
 	this.mode = mode;
-	if (mode < 0 || mode > 1){
-	    this.mode = 1;
+	deq = new MyDeque<Coord>();
+    }
+
+    public void add(Coord c){
+	if (mode == DFS){
+	    deq.addFirst(c);
+	}else{
+	    deq.addLast(c);
 	}
+    }
+    public Coord remove(){
+	return deq.removeFirst();
     }
 
 }
