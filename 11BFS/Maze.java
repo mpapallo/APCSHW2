@@ -99,11 +99,13 @@ public class Maze{
     }
     public boolean solveBFS(boolean animate){
 	solver = new Frontier(1);
-	Coord c = new Coord(startx, starty);
-	return BFS(solver, c);
+	Coord start = new Coord(startx, starty);
+	solver.add(start);
+	return BFS(solver, solver.remove());
     }    
     public boolean BFS(Frontier f, Coord current){
-	f.add(current);
+	int x = current.getX();
+	int y = current.getY();
 	if (inRange(x, y) && isValidSpace(x, y)){
 	    if (maze[y][x] == 'E'){
 		end = current;
@@ -126,9 +128,8 @@ public class Maze{
 		
 		return BFS(f, f.remove()); 
 	    }
-	}else{
-	    return false;
 	}
+	return false;
     }
     /*
     public boolean solveDFS(){
