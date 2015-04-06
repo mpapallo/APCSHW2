@@ -101,9 +101,24 @@ public class Maze{
 	solver = new Frontier(1);
 	Coord start = new Coord(startx, starty);
 	solver.add(start);
-	return BFS(solver, solver.remove());
-    }    
-    public boolean BFS(Frontier f, Coord current){
+	return solve(solver, solver.remove(), animate);
+    }
+
+    public boolean solveDFS(){
+	return solveDFS(false);
+    }
+    public boolean solveDFS(boolean animate){
+	solver = new Frontier(0);
+	Coord start = new Coord(startx, starty);
+	solver.add(start);
+	return solve(solver, solver.remove(), animate);
+    }
+    
+    public boolean solve(Frontier f, Coord current, boolean animate){
+	if (animate){
+	    wait(20);
+	    System.out.println(toString(animate));
+	}
 	int x = current.getX();
 	int y = current.getY();
 	if (inRange(x, y) && isValidSpace(x, y)){
@@ -126,23 +141,13 @@ public class Maze{
 		f.add(c);
 		f.add(d);
 		
-		return BFS(f, f.remove()); 
+		return solve(f, f.remove(), animate); 
 	    }
 	}
 	return false;
     }
-    /*
-    public boolean solveDFS(){
-	return solveDFS(false);
-    }
-    public boolean solveDFS(boolean animate){
-	solver = new Frontier(0);
-	return DFS(solver, startx, starty);
-    }
-    public boolean DFS(Frontier f, int x, int y){
-	
-    }
-    */
+    
+           
     public boolean inRange(int x, int y){
 	return !(x < 0 || y < 0 || x > maxx || y > maxy);
     }
@@ -153,6 +158,9 @@ public class Maze{
     public static void main(String[]args){
 	
 	Maze m = new Maze("data1.dat");
+	System.out.println(m);
+
+        m.solveBFS(true);
 	System.out.println(m);
 	
     }
