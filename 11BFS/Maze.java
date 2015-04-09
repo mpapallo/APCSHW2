@@ -93,23 +93,24 @@ public class Maze{
     public boolean solveBFS(boolean animate){
 	return solve(1, animate);
     }
-
     public boolean solveDFS(){
 	return solve(0, false);
     }
     public boolean solveDFS(boolean animate){
 	return solve(0, animate);
     }
+
     public boolean solve(int mode, boolean animate){
-	if (animate){
-	    wait(20);
-	    System.out.println(toString(animate));
-	}
-	f = new Frontier(mode);
+	Frontier f = new Frontier(mode);
 	Coord start = new Coord(startx, starty);
 	f.add(start);
 	
 	while(!f.isEmpty()){
+	    if (animate){
+		wait(20);
+		System.out.println(toString(animate));
+	    }
+
 	    Coord current = f.remove();
 	    int x = current.getX();
 	    int y = current.getY();
@@ -135,8 +136,9 @@ public class Maze{
 		    
 		}
 	    }
-	    return false;
 	}
+	return false;
+    }
     
            
     public boolean inRange(int x, int y){
