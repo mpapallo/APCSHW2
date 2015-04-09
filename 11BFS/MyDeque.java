@@ -22,6 +22,10 @@ public class MyDeque<T>{
 	return "michaela.papallo";
     }
 
+    public boolean isEmpty(){
+	return size == 0;
+    }
+
     public void addFirst(T value){
 	if (size == deq.length){
 	    grow();

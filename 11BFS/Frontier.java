@@ -20,4 +20,8 @@ public class Frontier{
 	return deq.removeFirst();
     }
 
+    public boolean isEmpty(){
+	return deq.isEmpty();
+    }
+
 }

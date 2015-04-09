@@ -73,14 +73,7 @@ public class Maze{
     }
     public String toString(boolean animate){
 	if (animate){
-	    String ans = ""+maxx+","+maxy+"\n";
-	    for(int i=0;i<maxx*maxy;i++){
-		if(i%maxx ==0 && i!=0){
-		    ans+="\n";
-		}
-		ans += maze[i%maxx][i/maxx];
-	    }
-	    return hide()+invert()+go(0,0)+ans+"\n"+show();
+	    return hide()+clear()+go(0, 0)+toString()+show();
 	}else{
 	    return toString();
 	}
@@ -108,51 +101,49 @@ public class Maze{
 	return solveDFS(false);
     }
     public boolean solveDFS(boolean animate){
-	solver = new Frontier(0);
-	Coord start = new Coord(startx, starty);
-	solver.add(start);
-	return solve(solver, solver.remove(), animate);
-    }
-    
-    public boolean solve(Frontier f, Coord current, boolean animate){
 	if (animate){
 	    wait(20);
 	    System.out.println(toString(animate));
 	}
-	int x = current.getX();
-	int y = current.getY();
-	if (inRange(x, y) && isValidSpace(x, y)){
-	    if (maze[y][x] == 'E'){
-		end = current;
-		return true;
-	    }else if (maze[y][x] == 'S' || maze[y][x] == ' '){
-		maze[y][x] = 'X';
-
-		Coord a = new Coord(x-1, y);
-		a.setPrev(current);
-		Coord b = new Coord(x+1, y);
-		b.setPrev(current);
-		Coord c = new Coord(x, y-1);
-		c.setPrev(current);
-		Coord d = new Coord(x, y+1);
-		d.setPrev(current);
-		f.add(a);
-		f.add(b);
-		f.add(c);
-		f.add(d);
-		
-		return solve(f, f.remove(), animate); 
+	f = new Frontier(0);
+	Coord start = new Coord(startx, starty);
+	f.add(start);
+	
+	while(!f.isEmpty()){
+	    Coord current = f.remove();
+	    int x = current.getX();
+	    int y = current.getY();
+	    
+	    if (inRange(x, y) && isValidSpace(x, y)){
+		if (maze[y][x] == 'E'){
+		    end = current;
+		    return true;
+		}else{
+		    maze[y][x] = 'X';
+		    Coord a = new Coord(x-1, y);
+		    a.setPrev(current);
+		    Coord b = new Coord(x+1, y);
+		    b.setPrev(current);
+		    Coord c = new Coord(x, y-1);
+		    c.setPrev(current);
+		    Coord d = new Coord(x, y+1);
+		    d.setPrev(current);
+		    f.add(a);
+		    f.add(b);
+		    f.add(c);
+		    f.add(d);
+		    
+		}
 	    }
+	    return false;
 	}
-	return false;
-    }
     
            
     public boolean inRange(int x, int y){
 	return !(x < 0 || y < 0 || x > maxx || y > maxy);
     }
     public boolean isValidSpace(int x, int y){
-	return !(maze[y][x] == '#');
+	return (maze[y][x] == 'E' || maze[y][x] == 'S' || maze[y][x] == ' ');
     }
 
     public static void main(String[]args){
