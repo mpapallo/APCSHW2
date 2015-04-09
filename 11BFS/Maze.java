@@ -88,24 +88,24 @@ public class Maze{
     }
 
     public boolean solveBFS(){
-	return solveBFS(false);
+	return solve(1, false);
     }
     public boolean solveBFS(boolean animate){
-	solver = new Frontier(1);
-	Coord start = new Coord(startx, starty);
-	solver.add(start);
-	return solve(solver, solver.remove(), animate);
+	return solve(1, animate);
     }
 
     public boolean solveDFS(){
-	return solveDFS(false);
+	return solve(0, false);
     }
     public boolean solveDFS(boolean animate){
+	return solve(0, animate);
+    }
+    public boolean solve(int mode, boolean animate){
 	if (animate){
 	    wait(20);
 	    System.out.println(toString(animate));
 	}
-	f = new Frontier(0);
+	f = new Frontier(mode);
 	Coord start = new Coord(startx, starty);
 	f.add(start);
 	
