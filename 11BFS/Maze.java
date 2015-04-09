@@ -111,10 +111,12 @@ public class Maze{
 		if (maze[y][x] == 'E'){
 		    end = current;
 		    Coord c = end;
-		    while(c.getPrev() != null){
+		    while(c != null){
 			solveLen ++;
 			c = c.getPrev();
 		    }
+		    //testing purposes:
+		    System.out.println(solveLen);
 		    return true;
 		}else{
 		    maze[y][x] = 'X';
@@ -144,12 +146,26 @@ public class Maze{
     }
     ////////////////////
 
-    /*
     public int[] solutionCoordinates(){
 	solution = new int[solveLen * 2];
-	
+	Coord c = end;
+	int i = 0;
+	//add coordinates in reverse order (start with end.getY())
+	while (c!= null){
+	    solution[i] = c.getY();
+	    solution[i+1] = c.getX();
+	    i += 2;
+	    c = c.getPrev();
+	}
+	//now reverse the array:
+	for (int x = 0; x < solveLen; x ++){
+	    int temp = solution[x];
+	    solution[x] = solution[solution.length - x - 1];
+	    solution[solution.length - x - 1] = temp;
+	}
+	return solution;
     }
-    */
+    
 
     public static void main(String[]args){
 	
