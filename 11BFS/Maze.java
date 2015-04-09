@@ -5,8 +5,9 @@ public class Maze{
     private char[][]maze;
     private int maxx, maxy;
     private int startx,starty;
-    private Frontier solver;
     private Coord end;
+    private int solveLen;
+    private int[] solution;
 
     public Maze(String filename){
 	startx = -1;
@@ -42,23 +43,12 @@ public class Maze{
 	}
     }
 
+    ////////// toString stuff //////////
+    private static final String clear =  "\033[2J";
+    private static final String hide =  "\033[?25l";
+    private static final String show =  "\033[?25h";
     private String go(int x,int y){
-	return ("["+x+";"+y+"H");
-    }    
-    private String clear(){
-	return  "[2J";
-    }
-    private String hide(){
-	return  "[?25l";
-    }
-    private String show(){
-	return  "[?25h";
-    }
-    private String invert(){
-	return  "[37";
-    }
-    public void clearTerminal(){
-	System.out.println(clear());
+	return ("\033[" + x + ";" + y + "H");
     }
 
     public String toString(){
@@ -73,7 +63,7 @@ public class Maze{
     }
     public String toString(boolean animate){
 	if (animate){
-	    return hide()+clear()+go(0, 0)+toString()+show();
+	    return hide + clear + go(0,0) + toString() + show;
 	}else{
 	    return toString();
 	}
@@ -86,7 +76,9 @@ public class Maze{
 	catch (InterruptedException e) {
 	}
     }
+    ////////////////////
 
+    ////////// Solve methods //////////
     public boolean solveBFS(){
 	return solve(1, false);
     }
@@ -118,6 +110,11 @@ public class Maze{
 	    if (inRange(x, y) && isValidSpace(x, y)){
 		if (maze[y][x] == 'E'){
 		    end = current;
+		    Coord c = end;
+		    while(c.getPrev() != null){
+			solveLen ++;
+			c = c.getPrev();
+		    }
 		    return true;
 		}else{
 		    maze[y][x] = 'X';
@@ -133,20 +130,26 @@ public class Maze{
 		    f.add(b);
 		    f.add(c);
 		    f.add(d);
-		    
 		}
 	    }
 	}
 	return false;
     }
-    
-           
+      
     public boolean inRange(int x, int y){
 	return !(x < 0 || y < 0 || x > maxx || y > maxy);
     }
     public boolean isValidSpace(int x, int y){
 	return (maze[y][x] == 'E' || maze[y][x] == 'S' || maze[y][x] == ' ');
     }
+    ////////////////////
+
+    /*
+    public int[] solutionCoordinates(){
+	solution = new int[solveLen * 2];
+	
+    }
+    */
 
     public static void main(String[]args){
 	
