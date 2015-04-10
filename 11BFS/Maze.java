@@ -102,7 +102,7 @@ public class Maze{
 		wait(20);
 		System.out.println(toString(animate));
 	    }
-
+	    
 	    Coord current = f.remove();
 	    int x = current.getX();
 	    int y = current.getY();
@@ -117,6 +117,7 @@ public class Maze{
 		    }
 		    //testing purposes:
 		    System.out.println(solveLen);
+		    System.out.println(toString());
 		    return true;
 		}else{
 		    maze[y][x] = 'X';
@@ -157,23 +158,36 @@ public class Maze{
 	    i += 2;
 	    c = c.getPrev();
 	}
-	//now reverse the array:
-	for (int x = 0; x < solveLen; x ++){
-	    int temp = solution[x];
-	    solution[x] = solution[solution.length - x - 1];
-	    solution[solution.length - x - 1] = temp;
-	}
+	solution = reverse(solution);
 	return solution;
     }
     
+    public int[] reverse(int[] a){
+	for (int x = 0; x < a.length / 2; x ++){
+	    int temp = a[x];
+	    a[x] = a[a.length - x - 1];
+	    a[a.length - x - 1] = temp;
+	}
+	return a;
+    }
 
     public static void main(String[]args){
+	/*
+	int[] a = new int[10];
+	for (int i = 10; i > 0; i --){
+	    a[10-i] = i;
+	}
+	System.out.println(Arrays.toString(a));
+	Maze m = new Maze("data1.dat");
+	System.out.println(Arrays.toString(m.reverse(a)));
+	*/
 	
 	Maze m = new Maze("data1.dat");
 	System.out.println(m);
 
-        m.solveBFS(true);
-	System.out.println(m);
+        if (m.solveDFS(true)){
+	    System.out.println(m);
+	}
 	
     }
 
