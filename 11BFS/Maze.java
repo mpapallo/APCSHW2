@@ -41,6 +41,7 @@ public class Maze{
 		starty = i/maxx;
 	    }
 	}
+
     }
 
     ////////// toString stuff //////////
@@ -137,7 +138,7 @@ public class Maze{
     }
       
     public boolean inRange(int x, int y){
-	return !(x < 0 || y < 0 || x >= maxx || y >= maxy);
+	return !(x < 0 || y < 0 || x >= maxy || y >= maxx);
     }
     public boolean isValidSpace(int x, int y){
 	return !(maze[y][x] == '#' || maze[y][x] == 'X');
@@ -173,9 +174,11 @@ public class Maze{
 	Maze m = new Maze("data1.dat");
 	System.out.println(m);
 
-        if (m.solveDFS(true)){
+        if (m.solveBFS(true)){
 	    System.out.println(m);
 	}
+	
+	
 	
     }
 
