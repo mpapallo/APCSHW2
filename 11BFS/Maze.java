@@ -32,16 +32,19 @@ public class Maze{
 	    System.exit(0);
 	}
 
-	maze = new char[maxx][maxy];
-	for(int i=0;i<ans.length();i++){
-	    char c = ans.charAt(i);
-	    maze[i%maxx][i/maxx]= c;
-	    if(c=='S'){
-		startx = i%maxx;
-		starty = i/maxx;
+	maze = new char[maxy][maxx];
+	int i = 0;
+	for (int y = 0; y < maxy; y ++){
+	    for (int x = 0; x < maxx; x ++){
+		char c = ans.charAt(i);
+		maze[y][x] = c;
+		if (c == 'S'){
+		    startx = x;
+		    starty = y;
+		}
+		i ++;
 	    }
 	}
-
     }
 
     ////////// toString stuff //////////
@@ -53,12 +56,12 @@ public class Maze{
     }
 
     public String toString(){
-	String ans = ""+maxx+","+maxy+"\n";
-	for(int i=0;i<maxx*maxy;i++){
-	    if(i%maxx ==0 && i!=0){
-		ans+="\n";
+	String ans = "" + maxy + " rows by " + maxx + " columns\n";
+	for (int y = 0; y < maxy; y ++){
+	    for (int x = 0; x < maxx; x ++){
+		ans += maze[y][x];
 	    }
-	    ans += maze[i%maxx][i/maxx];
+	    ans += "\n";
 	}
 	return ans;
     }
@@ -137,11 +140,12 @@ public class Maze{
 		}
 	    }
 	}
+	System.out.println("No Solution\n");
 	return false;
     }
       
     public boolean inRange(int x, int y){
-	return !(x < 0 || y < 0 || x >= maxy || y >= maxx);
+	return !(x < 0 || y < 0 || x >= maxx || y >= maxy);
     }
     public boolean isValidSpace(int x, int y){
 	return !(maze[y][x] == '#' || maze[y][x] == 'X');
@@ -150,12 +154,22 @@ public class Maze{
     public void clearPath(){
 	Coord c = end;
 	while (c != null){
-	    maze[c.getY()][c.getX()] = '.';
+	    int x = c.getX();
+	    int y = c.getY();
+	    if (x == end.getX() && y == end.getY()){
+		maze[y][x] = 'E';
+	    }else if (x == startx && y == starty){
+		maze[y][x] = 'S';
+	    }else{
+		maze[y][x] = '.';
+	    }
 	    c = c.getPrev();
 	}
-	for(int i=0;i<maxx*maxy;i++){
-	    if (maze[i%maxx][i/maxx] == 'X'){
-		maze[i%maxx][i/maxx] = ' ';
+	for (int y = 0; y < maxy; y ++){
+	    for (int x = 0; x < maxx; x ++){
+		if (maze[y][x] == 'X'){
+		    maze[y][x] = ' ';
+		}
 	    }
 	}
     }
@@ -187,12 +201,11 @@ public class Maze{
 
     public static void main(String[]args){
 	
-	Maze m = new Maze("data2.dat");
+	Maze m = new Maze("data1.dat");
 	System.out.println(m);
 
-        m.solveBFS(true);
+        m.solveDFS(true);
 	System.out.println(Arrays.toString(m.solutionCoordinates()));
-	
 	
     }
 
