@@ -137,7 +137,7 @@ public class Maze{
     }
       
     public boolean inRange(int x, int y){
-	return !(x < 0 || y < 0 || x > maxx || y > maxy);
+	return !(x < 0 || y < 0 || x >= maxx || y >= maxy);
     }
     public boolean isValidSpace(int x, int y){
 	return !(maze[y][x] == '#' || maze[y][x] == 'X');
@@ -173,7 +173,7 @@ public class Maze{
 	Maze m = new Maze("data1.dat");
 	System.out.println(m);
 
-        if (m.solveBFS(true)){
+        if (m.solveDFS(true)){
 	    System.out.println(m);
 	}
 	
