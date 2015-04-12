@@ -115,9 +115,6 @@ public class Maze{
 			solveLen ++;
 			c = c.getPrev();
 		    }
-		    //testing purposes:
-		    System.out.println(solveLen);
-		    System.out.println(toString());
 		    return true;
 		}else{
 		    maze[y][x] = 'X';
@@ -143,7 +140,7 @@ public class Maze{
 	return !(x < 0 || y < 0 || x > maxx || y > maxy);
     }
     public boolean isValidSpace(int x, int y){
-	return (maze[y][x] == 'E' || maze[y][x] == 'S' || maze[y][x] == ' ');
+	return !(maze[y][x] == '#' || maze[y][x] == 'X');
     }
     ////////////////////
 
@@ -172,20 +169,11 @@ public class Maze{
     }
 
     public static void main(String[]args){
-	/*
-	int[] a = new int[10];
-	for (int i = 10; i > 0; i --){
-	    a[10-i] = i;
-	}
-	System.out.println(Arrays.toString(a));
-	Maze m = new Maze("data1.dat");
-	System.out.println(Arrays.toString(m.reverse(a)));
-	*/
 	
 	Maze m = new Maze("data1.dat");
 	System.out.println(m);
 
-        if (m.solveDFS(true)){
+        if (m.solveBFS(true)){
 	    System.out.println(m);
 	}
 	
