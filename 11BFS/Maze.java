@@ -116,6 +116,9 @@ public class Maze{
 			solveLen ++;
 			c = c.getPrev();
 		    }
+		    //System.out.println(solveLen);
+		    clearPath();
+		    System.out.println(toString());
 		    return true;
 		}else{
 		    maze[y][x] = 'X';
@@ -143,16 +146,29 @@ public class Maze{
     public boolean isValidSpace(int x, int y){
 	return !(maze[y][x] == '#' || maze[y][x] == 'X');
     }
+
+    public void clearPath(){
+	Coord c = end;
+	while (c != null){
+	    maze[c.getY()][c.getX()] = '.';
+	    c = c.getPrev();
+	}
+	for(int i=0;i<maxx*maxy;i++){
+	    if (maze[i%maxx][i/maxx] == 'X'){
+		maze[i%maxx][i/maxx] = ' ';
+	    }
+	}
+    }
     ////////////////////
 
     public int[] solutionCoordinates(){
 	solution = new int[solveLen * 2];
 	Coord c = end;
 	int i = 0;
-	//add coordinates in reverse order (start with end.getY())
+	//add coordinates in reverse order
 	while (c!= null){
-	    solution[i] = c.getY();
-	    solution[i+1] = c.getX();
+	    solution[i] = c.getX();
+	    solution[i+1] = c.getY();
 	    i += 2;
 	    c = c.getPrev();
 	}
@@ -171,13 +187,11 @@ public class Maze{
 
     public static void main(String[]args){
 	
-	Maze m = new Maze("data1.dat");
+	Maze m = new Maze("data2.dat");
 	System.out.println(m);
 
-        if (m.solveBFS(true)){
-	    System.out.println(m);
-	}
-	
+        m.solveBFS(true);
+	System.out.println(Arrays.toString(m.solutionCoordinates()));
 	
 	
     }
