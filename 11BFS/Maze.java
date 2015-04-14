@@ -121,6 +121,7 @@ public class Maze{
 		    }
 		    //System.out.println(solveLen);
 		    clearPath();
+		    addCoordstoArray();
 		    System.out.println(toString());
 		    return true;
 		}else{
@@ -161,7 +162,7 @@ public class Maze{
 	    }else if (x == startx && y == starty){
 		maze[y][x] = 'S';
 	    }else{
-		maze[y][x] = '.';
+		maze[y][x] = '@';
 	    }
 	    c = c.getPrev();
 	}
@@ -174,8 +175,7 @@ public class Maze{
 	}
     }
     ////////////////////
-
-    public int[] solutionCoordinates(){
+    public void addCoordstoArray(){
 	solution = new int[solveLen * 2];
 	Coord c = end;
 	int i = 0;
@@ -187,6 +187,9 @@ public class Maze{
 	    c = c.getPrev();
 	}
 	solution = reverse(solution);
+    }
+
+    public int[] solutionCoordinates(){
 	return solution;
     }
     
@@ -204,7 +207,7 @@ public class Maze{
 	Maze m = new Maze("data1.dat");
 	System.out.println(m);
 
-        m.solveDFS(true);
+        m.solveBFS(false);
 	System.out.println(Arrays.toString(m.solutionCoordinates()));
 	
     }
