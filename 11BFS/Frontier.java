@@ -2,6 +2,7 @@ public class Frontier{
     
     private MyDeque<Coord> deq;
     private int DFS = 0;
+    private int BFS = 1;
     private int mode;
 
     public Frontier(int mode){

@@ -9,6 +9,10 @@ public class Maze{
     private int solveLen;
     private int[] solution;
 
+    public String name(){
+	return "michaela.papallo";
+    }
+
     public Maze(String filename){
 	startx = -1;
 	starty = -1;

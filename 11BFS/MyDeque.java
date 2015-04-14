@@ -2,6 +2,7 @@ import java.util.*;
 public class MyDeque<T>{
 
     private Object[] deq;
+    private int[] priorities;
     private int head;
     private int tail;  
     private int size;
@@ -12,6 +13,7 @@ public class MyDeque<T>{
     }
     public MyDeque(boolean b){
 	deq = new Object[10];
+	priorities = new int[10];
 	head = 5;
 	tail = 4;
 	size = 0;
@@ -48,48 +50,7 @@ public class MyDeque<T>{
 	deq[tail] = value;
 	size ++;
     }
-
-    public void grow(){
-	Object[] ret = new Object[deq.length * 2];
-	if (head < tail){
-	    for (int i = head; i <= tail; i ++){
-		ret[i] = deq[i];
-	    }
-	}else{
-	    for (int i = head; i < deq.length; i ++){
-		ret[i] = deq[i];
-	    }
-	    for (int i = 0; i <= tail; i ++){
-		ret[i + deq.length] = deq[i];
-	    }
-	    tail += deq.length;
-	}
-        deq = ret;
-    }
-
-    public void shrink(){
-	Object[] ret = new Object[deq.length / 2];
-	int c = 0;
-	if (head < tail){
-	    for (int i = head; i <= tail; i ++){
-		ret[c] = deq[i];
-		c ++;
-	    }
-	}else{
-	    for (int i = head; i < deq.length; i ++){
-		ret[c] = deq[i];
-		c ++;
-	    }
-	    for (int i = 0; i <= tail; i ++){
-		ret[c] = deq[i];
-		c ++;
-	    }
-	}
-	head = 0;
-	tail = c - 1;
-	deq = ret;
-    }
-
+       
     public T removeFirst(){
 	if (size == 0){
 	    throw new NoSuchElementException();
@@ -123,6 +84,77 @@ public class MyDeque<T>{
 	    tail = deq.length - 1;
 	}
 	return ret;
+    }
+
+    public void grow(){
+	Object[] ret = new Object[deq.length * 2];
+	if (head < tail){
+	    for (int i = head; i <= tail; i ++){
+		ret[i] = deq[i];
+	    }
+	}else{
+	    for (int i = head; i < deq.length; i ++){
+		ret[i] = deq[i];
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		ret[i + deq.length] = deq[i];
+	    }
+	    tail += deq.length;
+	}
+        deq = ret;
+    }
+
+    /////Priority Queue methods only/////
+    public void add(T value, int priority){
+	if (size == deq.length){
+	    grow();
+	    growInt();
+	}
+	addLast(value);
+	priorities[tail] = priority;
+    }
+    public T removeSmallest(){
+	
+    }
+    public void growInt(){
+	int[] ret = new int[priorities.length * 2];
+	if (head < tail){
+	    for (int i = head; i <= tail; i ++){
+		ret[i] = priorities[i];
+	    }
+	}else{
+	    for (int i = head; i < priorities.length; i ++){
+		ret[i] = priorities[i];
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		ret[i + priorities.length] = priorities[i];
+	    }
+	}
+        priorities = ret;
+    }
+    ///////////
+
+    public void shrink(){
+	Object[] ret = new Object[deq.length / 2];
+	int c = 0;
+	if (head < tail){
+	    for (int i = head; i <= tail; i ++){
+		ret[c] = deq[i];
+		c ++;
+	    }
+	}else{
+	    for (int i = head; i < deq.length; i ++){
+		ret[c] = deq[i];
+		c ++;
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		ret[c] = deq[i];
+		c ++;
+	    }
+	}
+	head = 0;
+	tail = c - 1;
+	deq = ret;
     }
 
     public T getFirst(){
