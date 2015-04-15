@@ -114,7 +114,50 @@ public class MyDeque<T>{
 	priorities[tail] = priority;
     }
     public T removeSmallest(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+
+	if (shrink && size <= deq.length / 4){
+	    shrink();
+	}
 	
+	int min = priorities[head];
+	int index = head;
+        Object ret = deq[head];
+	if (head < tail){
+	    for (int i = head; i <= tail; i ++){
+		if (priorities[i] < min){
+		    min = priorities[i];
+		    index = i;
+		    ret = deq[i];
+		}
+	    }
+	}else{
+	    for (int i = head; i < priorities.length; i ++){
+		if (priorities[i] < min){
+		    min = priorities[i];
+		    index = i;
+		    ret = deq[i];
+		}
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		if (priorities[i] < min){
+		    min = priorities[i];
+		    index = i;
+		    ret = deq[i];
+		}
+	    }
+	}
+	deq[index] = deq[head];
+	priorities[index] = priorities[head];
+	head ++;
+	if (head == deq.length){
+	    head = 0;
+	}
+	size --;
+	return (T)ret;
+
     }
     public void growInt(){
 	int[] ret = new int[priorities.length * 2];
