@@ -4,7 +4,7 @@ public class Maze{
 
     private char[][]maze;
     private int maxx, maxy;
-    private int startx,starty;
+    private int startx,starty, endx, endy;
     private Coord end;
     private int solveLen;
     private int[] solution;
@@ -45,6 +45,10 @@ public class Maze{
 		if (c == 'S'){
 		    startx = x;
 		    starty = y;
+		}
+		if (c == 'E'){
+		    endx = x;
+		    endy = y;
 		}
 		i ++;
 	    }
@@ -87,19 +91,19 @@ public class Maze{
     ////////////////////
 
     ////////// Solve methods //////////
-    public boolean solveBFS(){
-	return solve(1, false);
-    }
-    public boolean solveBFS(boolean animate){
-	return solve(1, animate);
-    }
     public boolean solveDFS(){
 	return solve(0, false);
     }
     public boolean solveDFS(boolean animate){
 	return solve(0, animate);
     }
-
+    public boolean solveBFS(){
+	return solve(1, false);
+    }
+    public boolean solveBFS(boolean animate){
+	return solve(1, animate);
+    }
+    
     public boolean solve(int mode, boolean animate){
 	Frontier f = new Frontier(mode);
 	Coord start = new Coord(startx, starty);
@@ -129,7 +133,7 @@ public class Maze{
 		    System.out.println(toString());
 		    return true;
 		}else{
-		    maze[y][x] = 'X';
+		    maze[y][x] = '.';
 		    Coord a = new Coord(x-1, y);
 		    a.setPrev(current);
 		    Coord b = new Coord(x+1, y);
@@ -153,7 +157,7 @@ public class Maze{
 	return !(x < 0 || y < 0 || x >= maxx || y >= maxy);
     }
     public boolean isValidSpace(int x, int y){
-	return !(maze[y][x] == '#' || maze[y][x] == 'X');
+	return !(maze[y][x] == '#' || maze[y][x] == '.');
     }
 
     public void clearPath(){
@@ -172,7 +176,7 @@ public class Maze{
 	}
 	for (int y = 0; y < maxy; y ++){
 	    for (int x = 0; x < maxx; x ++){
-		if (maze[y][x] == 'X'){
+		if (maze[y][x] == '.'){
 		    maze[y][x] = ' ';
 		}
 	    }
@@ -208,10 +212,10 @@ public class Maze{
 
     public static void main(String[]args){
 	
-	Maze m = new Maze("data1.dat");
+	Maze m = new Maze("data4.dat");
 	System.out.println(m);
 
-        m.solveBFS(false);
+        m.solveDFS(true);
 	System.out.println(Arrays.toString(m.solutionCoordinates()));
 	
     }

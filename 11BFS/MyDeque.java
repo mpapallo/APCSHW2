@@ -112,6 +112,11 @@ public class MyDeque<T>{
 	}
 	addLast(value);
 	priorities[tail] = priority;
+	System.out.println(head);
+	System.out.println(tail);
+	System.out.println(Arrays.toString(deq));
+	System.out.println(Arrays.toString(priorities));
+	
     }
     public T removeSmallest(){
 	if (size == 0){
@@ -231,12 +236,57 @@ public class MyDeque<T>{
 	}
 	return ret + "]";
     }
+    public String toStringPriorities(){
+	String ret = "[ ";
+	if (size > 0){
+	    if (head <= tail){
+		for (int i = head; i <= tail; i ++){
+		    ret += priorities[i] + " ";
+		}
+	    }else{
+		for (int i = head; i < priorities.length; i ++){
+		    ret += priorities[i] + " ";
+		}
+		for (int i = 0; i <= tail; i ++){
+		    ret += priorities[i] + " ";
+		}
+	    }
+	}
+	return ret + "]";
+    }
+    
+    public String seeDeq(){
+	return Arrays.toString(deq);
+    }
+    public String seePriorities(){
+	return Arrays.toString(priorities);
+    }
 
     public static void main(String[]args){
 	
 	MyDeque<String> d = new MyDeque<String>();
-	System.out.println(d);
 	
+	d.add("hello", 4);
+	d.add("goodbye", 3);
+	d.add("what", 6);
+	
+	System.out.println("Order should be goodbye, hello, what");
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println(d.removeSmallest());
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println(d.removeSmallest());
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println(d.removeSmallest());
+
     }
 
 }
