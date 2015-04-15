@@ -135,17 +135,17 @@ public class Maze{
 		}else{
 		    maze[y][x] = '.';
 		    Coord a = new Coord(x-1, y);
-		    a.setPrev(current);
 		    Coord b = new Coord(x+1, y);
-		    b.setPrev(current);
 		    Coord c = new Coord(x, y-1);
-		    c.setPrev(current);
 		    Coord d = new Coord(x, y+1);
+		    a.setPrev(current);
+		    b.setPrev(current);
+		    c.setPrev(current);
 		    d.setPrev(current);
 		    f.add(a);
 		    f.add(b);
 		    f.add(c);
-		    f.add(d);
+		    f.add(d); 
 		}
 	    }
 	}
@@ -170,7 +170,7 @@ public class Maze{
 	    }else if (x == startx && y == starty){
 		maze[y][x] = 'S';
 	    }else{
-		maze[y][x] = '@';
+		maze[y][x] = 'P';
 	    }
 	    c = c.getPrev();
 	}
@@ -208,16 +208,6 @@ public class Maze{
 	    a[a.length - x - 1] = temp;
 	}
 	return a;
-    }
-
-    public static void main(String[]args){
-	
-	Maze m = new Maze("data4.dat");
-	System.out.println(m);
-
-        m.solveDFS(true);
-	System.out.println(Arrays.toString(m.solutionCoordinates()));
-	
     }
 
 }
