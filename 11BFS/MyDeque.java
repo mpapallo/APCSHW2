@@ -28,6 +28,7 @@ public class MyDeque<T>{
 	return size == 0;
     }
 
+    /////Stack and Queue Methods/////
     public void addFirst(T value){
 	if (size == deq.length){
 	    grow();
@@ -86,6 +87,20 @@ public class MyDeque<T>{
 	return ret;
     }
 
+    public T getFirst(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+	return (T)deq[head];
+    }
+    public T getLast(){
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+	return (T)deq[tail];
+    }
+    //////////
+
     public void grow(){
 	Object[] ret = new Object[deq.length * 2];
 	if (head < tail){
@@ -103,84 +118,6 @@ public class MyDeque<T>{
 	}
         deq = ret;
     }
-
-    /////Priority Queue methods only/////
-    public void add(T value, int priority){
-	if (size == deq.length){
-	    grow();
-	    growInt();
-	}
-	addLast(value);
-	priorities[tail] = priority;
-	System.out.println(head);
-	System.out.println(tail);
-	System.out.println(Arrays.toString(deq));
-	System.out.println(Arrays.toString(priorities));
-	
-    }
-    public T removeSmallest(){
-	if (size == 0){
-	    throw new NoSuchElementException();
-	}
-
-	if (shrink && size <= deq.length / 4){
-	    shrink();
-	}
-	
-	int min = priorities[head];
-	int index = head;
-        Object ret = deq[head];
-	if (head < tail){
-	    for (int i = head; i <= tail; i ++){
-		if (priorities[i] < min){
-		    min = priorities[i];
-		    index = i;
-		    ret = deq[i];
-		}
-	    }
-	}else{
-	    for (int i = head; i < priorities.length; i ++){
-		if (priorities[i] < min){
-		    min = priorities[i];
-		    index = i;
-		    ret = deq[i];
-		}
-	    }
-	    for (int i = 0; i <= tail; i ++){
-		if (priorities[i] < min){
-		    min = priorities[i];
-		    index = i;
-		    ret = deq[i];
-		}
-	    }
-	}
-	deq[index] = deq[head];
-	priorities[index] = priorities[head];
-	head ++;
-	if (head == deq.length){
-	    head = 0;
-	}
-	size --;
-	return (T)ret;
-
-    }
-    public void growInt(){
-	int[] ret = new int[priorities.length * 2];
-	if (head < tail){
-	    for (int i = head; i <= tail; i ++){
-		ret[i] = priorities[i];
-	    }
-	}else{
-	    for (int i = head; i < priorities.length; i ++){
-		ret[i] = priorities[i];
-	    }
-	    for (int i = 0; i <= tail; i ++){
-		ret[i + priorities.length] = priorities[i];
-	    }
-	}
-        priorities = ret;
-    }
-    ///////////
 
     public void shrink(){
 	Object[] ret = new Object[deq.length / 2];
@@ -205,18 +142,71 @@ public class MyDeque<T>{
 	deq = ret;
     }
 
-    public T getFirst(){
+    /////Priority Queue Methods/////
+    public void add(T value, int priority){
+	if (size == deq.length){
+	    grow();
+	    growInt();
+	}
+	addLast(value);
+	priorities[tail] = priority;	
+    }
+
+    public T removeSmallest(){
 	if (size == 0){
 	    throw new NoSuchElementException();
 	}
-	return (T)deq[head];
-    }
-    public T getLast(){
-	if (size == 0){
-	    throw new NoSuchElementException();
+
+	if (shrink && size <= deq.length / 4){
+	    shrink();
 	}
-	return (T)deq[tail];
+	
+	int index = head;
+	if (head <= tail){
+	    for (int i = head + 1; i <= tail; i ++){
+		if (priorities[i] < priorities[index]){
+		    index = i;
+		}
+	    }
+	}else{
+	    for (int i = head + 1; i < priorities.length; i ++){
+		if (priorities[i] < priorities[index]){
+		    index = i;
+		}
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		if (priorities[i] < priorities[index]){
+		    index = i;
+		}
+	    }
+	}
+	System.out.println("index: " + index);
+	System.out.println("tail: " + tail);
+	System.out.println("head: " + head);
+	Object ret = deq[index];
+	priorities[index] = priorities[head];
+	priorities[head] = 0;
+	deq[index] = removeFirst();
+	return (T)ret;
     }
+
+    public void growInt(){
+	int[] ret = new int[priorities.length * 2];
+	if (head <= tail){
+	    for (int i = head; i <= tail; i ++){
+		ret[i] = priorities[i];
+	    }
+	}else{
+	    for (int i = head; i < priorities.length; i ++){
+		ret[i] = priorities[i];
+	    }
+	    for (int i = 0; i <= tail; i ++){
+		ret[i + priorities.length] = priorities[i];
+	    }
+	}
+        priorities = ret;
+    }
+    ///////////
 
     public String toString(){
 	String ret = "[ ";
@@ -236,6 +226,7 @@ public class MyDeque<T>{
 	}
 	return ret + "]";
     }
+
     public String toStringPriorities(){
 	String ret = "[ ";
 	if (size > 0){
@@ -267,26 +258,40 @@ public class MyDeque<T>{
 	MyDeque<String> d = new MyDeque<String>();
 	
 	d.add("hello", 4);
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println();
 	d.add("goodbye", 3);
-	d.add("what", 6);
-	
-	System.out.println("Order should be goodbye, hello, what");
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
 	System.out.println(d.seeDeq());
 	System.out.println(d.seePriorities());
-	System.out.println(d.removeSmallest());
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
+	System.out.println();
+	d.add("what", 2);
 	System.out.println(d.seeDeq());
 	System.out.println(d.seePriorities());
-	System.out.println(d.removeSmallest());
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println(d.removeSmallest());
+	System.out.println();
 
+
+	System.out.println("Order should be what, goodbye, hello\n");
+
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println(d.removeSmallest());
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println(d.removeSmallest());
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
+	System.out.println(d.removeSmallest());
+	System.out.println(d);
+	System.out.println(d.toStringPriorities());
+	System.out.println(d.seeDeq());
+	System.out.println(d.seePriorities());
     }
 
 }

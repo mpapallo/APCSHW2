@@ -5,7 +5,7 @@ public class Driver{
 	Maze m = new Maze("data1.dat");
 	boolean b = false;
 	
-        if (args.length < 1){
+	if (args.length < 1){
 	    System.out.println("usage: args[0] = mode (DFS, BFS, Best, Astar); args[1] = animate (true, false)");
 	}else{
 	    if (args[1].equals("true")){
