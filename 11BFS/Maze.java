@@ -6,12 +6,12 @@ public class Maze{
     private int maxx, maxy;
     private int startx,starty, endx, endy;
     private Coord end;
-    private int solveLen;
+    private int solveLen, stepsSoFar;
     private int[] solution;
     private int DFS = 0;
     private int BFS = 1;
     private int Best = 2;
-    private int Astar = 3;
+    private int AStar = 3;
 
     public String name(){
 	return "michaela.papallo";
@@ -113,19 +113,28 @@ public class Maze{
     public boolean solveBest(boolean animate){
 	return solve(2, animate);
     }
+    public boolean solveAStar(){
+	return solveAStar(false);
+    }
+    public boolean solveAStar(boolean animate){
+	return solve(3, animate);
+    }
     
     public boolean solve(int mode, boolean animate){
+	int steps = 0;
 	Frontier f = new Frontier(mode);
 	Coord start = new Coord(startx, starty);
 	if (mode == DFS || mode == BFS){
 	    f.add(start);
 	}else if (mode == Best){
 	    f.add(start, abs(endx-startx) + abs(endy-starty));
+	}else if (mode == AStar){
+	    f.add(start, abs(endx-startx) + abs(endy-starty) + steps);
 	}
 	
 	while(!f.isEmpty()){
 	    if (animate){
-		wait(20);
+		wait(30);
 		System.out.println(toString(animate));
 	    }
 	    
@@ -165,9 +174,16 @@ public class Maze{
 			if (inRange(ex, why) && isValidSpace(ex, why)){
 			    f.add(cord, abs(endx-ex) + abs(endy-why));
 			}
+		    }else if (mode == AStar){
+			if (inRange(ex, why) && isValidSpace(ex, why)){
+			    f.add(cord, abs(endx-ex) + abs(endy-why) + steps);
+			}
 		    }	
 		}
-	    }  
+	    } 
+	    if (mode == AStar){
+		steps ++;
+	    }
 	}
 	System.out.println("No Solution\n");
 	return false;
