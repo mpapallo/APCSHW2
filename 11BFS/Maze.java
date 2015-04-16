@@ -132,40 +132,42 @@ public class Maze{
 	    Coord current = f.remove();
 	    int x = current.getX();
 	    int y = current.getY();
-	    
-	    if (inRange(x, y) && isValidSpace(x, y)){
-		if (maze[y][x] == 'E'){
-		    end = current;
-		    Coord c = end;
-		    while(c != null){
-			solveLen ++;
-			c = c.getPrev();
-		    }
-		    //System.out.println(solveLen);
-		    clearPath();
-		    addCoordstoArray();
-		    System.out.println(toString());
-		    return true;
-		}else{
-		    maze[y][x] = '.';
-		    Coord[] candidates = new Coord[]{
-		        new Coord(x-1, y),
-		        new Coord(x+1, y),
-		        new Coord(x, y-1),
-		        new Coord(x, y+1),
-		    };
-		    for (Coord cord : candidates){
-			cord.setPrev(current);
-			if (mode == DFS || mode == BFS){
-			    f.add(cord);
-			}else if (mode == Best){
-			    int ex = cord.getX();
-			    int why = cord.getY();
-			    f.add(cord, abs(endx-ex) + abs(endy-why));
-			}	
-		    }
+
+	    if (maze[y][x] == 'E'){
+		end = current;
+		Coord c = end;
+		while(c != null){
+		    solveLen ++;
+		    c = c.getPrev();
 		}
-	    }
+		//System.out.println(solveLen);
+		clearPath();
+		addCoordstoArray();
+		System.out.println(toString());
+		return true;
+	    }else{
+		maze[y][x] = '.';
+		Coord[] candidates = new Coord[]{
+		    new Coord(x-1, y),
+		    new Coord(x+1, y),
+		    new Coord(x, y-1),
+		    new Coord(x, y+1),
+		};
+		for (Coord cord : candidates){
+		    cord.setPrev(current);
+		    int ex = cord.getX();
+		    int why = cord.getY();
+		    if (mode == DFS || mode == BFS){
+			if (inRange(ex, why) && isValidSpace(ex, why)){
+			    f.add(cord);
+			}
+		    }else if (mode == Best){
+			if (inRange(ex, why) && isValidSpace(ex, why)){
+			    f.add(cord, abs(endx-ex) + abs(endy-why));
+			}
+		    }	
+		}
+	    }  
 	}
 	System.out.println("No Solution\n");
 	return false;
