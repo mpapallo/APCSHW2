@@ -18,12 +18,17 @@ public class Frontier{
 	}else if(mode == BFS){
 	    deq.addLast(c);
 	}
-	//else use priority queue
     }
+    public void add(Coord c, int priority){
+	deq.add(c, priority);
+    }
+    
     public Coord remove(){
-	//if mode == BFS or DFS
-	return deq.removeFirst();
-	//else use removeSmallest
+        if (mode == BFS || mode == DFS){
+	    return deq.removeFirst();
+	}else{
+	    return deq.removeSmallest();
+	}
     }
 
     public boolean isEmpty(){

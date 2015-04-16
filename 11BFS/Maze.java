@@ -8,6 +8,10 @@ public class Maze{
     private Coord end;
     private int solveLen;
     private int[] solution;
+    private int DFS = 0;
+    private int BFS = 1;
+    private int Best = 2;
+    private int Astar = 3;
 
     public String name(){
 	return "michaela.papallo";
@@ -103,11 +107,21 @@ public class Maze{
     public boolean solveBFS(boolean animate){
 	return solve(1, animate);
     }
+    public boolean solveBest(){
+	return solveBest(false);
+    }
+    public boolean solveBest(boolean animate){
+	return solve(2, animate);
+    }
     
     public boolean solve(int mode, boolean animate){
 	Frontier f = new Frontier(mode);
 	Coord start = new Coord(startx, starty);
-	f.add(start);
+	if (mode == DFS || mode == BFS){
+	    f.add(start);
+	}else if (mode == Best){
+	    f.add(start, abs(endx-startx) + abs(endy-starty));
+	}
 	
 	while(!f.isEmpty()){
 	    if (animate){
@@ -134,18 +148,22 @@ public class Maze{
 		    return true;
 		}else{
 		    maze[y][x] = '.';
-		    Coord a = new Coord(x-1, y);
-		    Coord b = new Coord(x+1, y);
-		    Coord c = new Coord(x, y-1);
-		    Coord d = new Coord(x, y+1);
-		    a.setPrev(current);
-		    b.setPrev(current);
-		    c.setPrev(current);
-		    d.setPrev(current);
-		    f.add(a);
-		    f.add(b);
-		    f.add(c);
-		    f.add(d); 
+		    Coord[] candidates = new Coord[]{
+		        new Coord(x-1, y),
+		        new Coord(x+1, y),
+		        new Coord(x, y-1),
+		        new Coord(x, y+1),
+		    };
+		    for (Coord cord : candidates){
+			cord.setPrev(current);
+			if (mode == DFS || mode == BFS){
+			    f.add(cord);
+			}else if (mode == Best){
+			    int ex = cord.getX();
+			    int why = cord.getY();
+			    f.add(cord, abs(endx-ex) + abs(endy-why));
+			}	
+		    }
 		}
 	    }
 	}
@@ -158,6 +176,14 @@ public class Maze{
     }
     public boolean isValidSpace(int x, int y){
 	return !(maze[y][x] == '#' || maze[y][x] == '.');
+    }
+
+    public int abs(int x){
+	if (x < 0){
+	    return x *= -1;
+	}else{
+	    return x;
+	}
     }
 
     public void clearPath(){
@@ -182,7 +208,7 @@ public class Maze{
 	    }
 	}
     }
-    ////////////////////
+
     public void addCoordstoArray(){
 	solution = new int[solveLen * 2];
 	Coord c = end;
