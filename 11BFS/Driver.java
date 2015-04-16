@@ -17,6 +17,9 @@ public class Driver{
 	    }else if (args[0].equals("DFS")){
 		m.solveDFS(b);
 		System.out.println(Arrays.toString(m.solutionCoordinates()));
+	    }else if (args[0].equals("Best")){
+		m.solveBest(b);
+		System.out.println(Arrays.toString(m.solutionCoordinates()));
 	    }
 	}
 	

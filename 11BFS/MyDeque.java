@@ -145,11 +145,11 @@ public class MyDeque<T>{
     /////Priority Queue Methods/////
     public void add(T value, int priority){
 	if (size == deq.length){
-	    grow();
 	    growInt();
+	    grow();
 	}
-	addLast(value);
-	priorities[tail] = priority;	
+	addFirst(value);
+	priorities[head] = priority;	
     }
 
     public T removeSmallest(){
@@ -180,9 +180,6 @@ public class MyDeque<T>{
 		}
 	    }
 	}
-	//System.out.println("index: " + index);
-	//System.out.println("tail: " + tail);
-	//System.out.println("head: " + head);
 	Object ret = deq[index];
 	priorities[index] = priorities[head];
 	priorities[head] = 0;
@@ -192,7 +189,7 @@ public class MyDeque<T>{
 
     public void growInt(){
 	int[] ret = new int[priorities.length * 2];
-	if (head <= tail){
+	if (head < tail){
 	    for (int i = head; i <= tail; i ++){
 		ret[i] = priorities[i];
 	    }
@@ -250,6 +247,8 @@ public class MyDeque<T>{
 	return Arrays.toString(deq);
     }
     public String seePriorities(){
+	//System.out.println(head);
+	//System.out.println(tail);
 	return Arrays.toString(priorities);
     }
 
@@ -260,10 +259,6 @@ public class MyDeque<T>{
 	d.add("hello", 4);
 	d.add("goodbye", 3);
 	d.add("what", 2);
-	System.out.println("Order should be what, goodbye, hello\n");
-	System.out.println(d.removeSmallest());
-	System.out.println(d.removeSmallest());
-	System.out.println(d.removeSmallest());
 
     }
 
