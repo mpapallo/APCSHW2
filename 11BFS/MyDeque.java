@@ -180,9 +180,9 @@ public class MyDeque<T>{
 		}
 	    }
 	}
-	System.out.println("index: " + index);
-	System.out.println("tail: " + tail);
-	System.out.println("head: " + head);
+	//System.out.println("index: " + index);
+	//System.out.println("tail: " + tail);
+	//System.out.println("head: " + head);
 	Object ret = deq[index];
 	priorities[index] = priorities[head];
 	priorities[head] = 0;
@@ -258,40 +258,13 @@ public class MyDeque<T>{
 	MyDeque<String> d = new MyDeque<String>();
 	
 	d.add("hello", 4);
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println();
 	d.add("goodbye", 3);
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println();
 	d.add("what", 2);
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println();
-
-
 	System.out.println("Order should be what, goodbye, hello\n");
+	System.out.println(d.removeSmallest());
+	System.out.println(d.removeSmallest());
+	System.out.println(d.removeSmallest());
 
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println(d.removeSmallest());
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println(d.removeSmallest());
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
-	System.out.println(d.removeSmallest());
-	System.out.println(d);
-	System.out.println(d.toStringPriorities());
-	System.out.println(d.seeDeq());
-	System.out.println(d.seePriorities());
     }
 
 }
