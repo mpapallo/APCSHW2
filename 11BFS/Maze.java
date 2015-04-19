@@ -121,20 +121,13 @@ public class Maze{
     }
     
     public boolean solve(int mode, boolean animate){
-	int steps = 0;
-	Frontier f = new Frontier(mode);
-	Coord start = new Coord(startx, starty);
-	if (mode == DFS || mode == BFS){
-	    f.add(start);
-	}else if (mode == Best){
-	    f.add(start, abs(endx-startx) + abs(endy-starty));
-	}else if (mode == AStar){
-	    f.add(start, abs(endx-startx) + abs(endy-starty) + steps);
-	}
+	Frontier f = new Frontier(mode, endx, endy);
+	Coord start = new Coord(startx, starty, 0);
+        f.add(start);
 	
 	while(!f.isEmpty()){
 	    if (animate){
-		wait(30);
+		wait(20);
 		System.out.println(toString(animate));
 	    }
 	    
@@ -157,33 +150,20 @@ public class Maze{
 	    }else{
 		maze[y][x] = '.';
 		Coord[] candidates = new Coord[]{
-		    new Coord(x-1, y),
-		    new Coord(x+1, y),
-		    new Coord(x, y-1),
-		    new Coord(x, y+1),
+		    new Coord(x-1, y, current.getSteps() + 1),
+		    new Coord(x+1, y, current.getSteps() + 1),
+		    new Coord(x, y-1, current.getSteps() + 1),
+		    new Coord(x, y+1, current.getSteps() + 1),
 		};
 		for (Coord cord : candidates){
 		    cord.setPrev(current);
 		    int ex = cord.getX();
 		    int why = cord.getY();
-		    if (mode == DFS || mode == BFS){
-			if (inRange(ex, why) && isValidSpace(ex, why)){
-			    f.add(cord);
-			}
-		    }else if (mode == Best){
-			if (inRange(ex, why) && isValidSpace(ex, why)){
-			    f.add(cord, abs(endx-ex) + abs(endy-why));
-			}
-		    }else if (mode == AStar){
-			if (inRange(ex, why) && isValidSpace(ex, why)){
-			    f.add(cord, abs(endx-ex) + abs(endy-why) + steps);
-			}
-		    }	
+		    if (inRange(ex, why) && isValidSpace(ex, why)){
+			f.add(cord);
+		    }
 		}
 	    } 
-	    if (mode == AStar){
-		steps ++;
-	    }
 	}
 	System.out.println("No Solution\n");
 	return false;
@@ -194,14 +174,6 @@ public class Maze{
     }
     public boolean isValidSpace(int x, int y){
 	return !(maze[y][x] == '#' || maze[y][x] == '.');
-    }
-
-    public int abs(int x){
-	if (x < 0){
-	    return x *= -1;
-	}else{
-	    return x;
-	}
     }
 
     public void clearPath(){
@@ -240,10 +212,6 @@ public class Maze{
 	}
 	solution = reverse(solution);
     }
-
-    public int[] solutionCoordinates(){
-	return solution;
-    }
     
     public int[] reverse(int[] a){
 	for (int x = 0; x < a.length / 2; x ++){
@@ -252,6 +220,10 @@ public class Maze{
 	    a[a.length - x - 1] = temp;
 	}
 	return a;
+    }
+
+    public int[] solutionCoordinates(){
+	return solution;
     }
 
 }
