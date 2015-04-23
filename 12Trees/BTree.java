@@ -13,7 +13,6 @@ public class BTree<T>{
 	add(root, a);
     }
     private void add(TreeNode<T> curr, TreeNode<T> bn){
-	
 	if (curr == null){
 	    curr = bn;
 	}else if (curr.getLeft() == null){
@@ -22,7 +21,11 @@ public class BTree<T>{
 	    curr.getRight();
 	}else{
 	    int x = Math.random(2);
-
+	    if (x == 0){
+		add(curr.getLeft(), bn);
+	    }else{
+		add(curr.getRight(), bn);
+	    }
 	}
     }
 
