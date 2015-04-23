@@ -127,4 +127,38 @@ public class BTree<T>{
 	return -1;
     }
 
+    /*======== public String getLevel() ==========
+      Inputs:   TreeNode<E> curr
+                int level
+                int currLevel  
+      Returns: A string containing all the elements on the
+               given level, ordered left -> right
+      
+      ====================*/
+    private String getLevel( TreeNode<E> curr, int level, int currLevel ) {
+	return "";
+    }
+    
+    /*======== public String toString()) ==========
+      Inputs:   
+      Returns: A string representation of the tree
+     
+      This string should display each level as a separate line.
+      A simple version might look something like this:
+
+      0
+      1 2
+      3 4 5
+
+      Note that you cannot tell exactly where 3, 4 and 5 lie.
+      That is ok, but if you want a CHALLENGE, you can try to
+      get the output to look nicer, something like this:
+             0
+          1      2
+            3  4   5
+      ====================*/
+    public String toString() {
+	return "";
+    }
+
 }
