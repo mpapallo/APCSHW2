@@ -14,10 +14,27 @@ public class BTree<T>{
 	rand = new Random();
     }
 
+    /*======== public void add() ==========
+      Inputs:   E d
+      Returns: 
+      
+      Wrapper method for the recursive add()
+      ====================*/
     public void add(T d){
 	TreeNode<T> a = new TreeNode<T>(d);
 	add(root, a);
     }
+    /*======== public void add() ==========
+      Inputs:   TreeNode<E> curr, TreeNode<E> bn  
+      Returns: 
+      
+      Adds bn to the tree rooted at curr. If curr has 
+      an available child space, then attach bn there.
+
+      Otherwise, try to add at the subtree rooted at
+      one of curr's children. Choose the child to be
+      added to randomly.
+      ====================*/
     private void add(TreeNode<T> curr, TreeNode<T> bn){
 	if (curr == null){
 	    curr = bn;
@@ -35,6 +52,8 @@ public class BTree<T>{
 	}
     }
 
+    /*======== traverse wrapper function ========
+     */
     public void traverse(int mode){
 	if (mode == PRE_ORDER){
 	    preOrder(root);
@@ -46,6 +65,13 @@ public class BTree<T>{
 	System.out.println();
     }
 
+    /*======== public void preOrder() ==========
+      Inputs:   TreeNode<E> curr  
+      Returns: 
+      
+      Prints out the elements in the tree by doing an
+      pre-order Traversal
+      ====================*/
     public void preOrder(TreeNode<T> curr){
 	if (curr != null){
 	    System.out.print(curr.getData());
@@ -53,6 +79,13 @@ public class BTree<T>{
 	    preOrder(curr.getRight());
 	}
     }
+    /*======== public void inOrder() ==========
+      Inputs:   TreeNode<E> curr  
+      Returns: 
+      
+      Prints out the elements in the tree by doing an
+      in-order Traversal
+      ====================*/
     public void inOrder(TreeNode<T> curr){
 	if (curr != null){
 	    inOrder(curr.getLeft());
@@ -60,12 +93,38 @@ public class BTree<T>{
 	    inOrder(curr.getRight());
 	}
     }
+    /*======== public void postOrder() ==========
+      Inputs:   TreeNode<E> curr  
+      Returns: 
+      
+      Prints out the elements in the tree by doing a
+      post-order Traversal    
+      ====================*/
     public void postOrder(TreeNode<T> curr){
 	if (curr != null){
 	    postOrder(curr.getLeft());
 	    postOrder(curr.getRight());
 	    System.out.print(curr.getData());
 	}
+    }
+
+    /*======== public int getHeight()) ==========
+      Inputs:   
+      Returns: The height of the tree
+
+      Wrapper for the recursive getHeight method
+      ====================*/
+    public int getHeight() {
+	return getHeight(root, 0);
+    }
+    /*======== public int getHeight() ==========
+      Inputs:   TreeNode<E> curr  
+      Returns:  The height of the tree rooted at node curr
+      
+      ====================*/
+    public int getHeight(TreeNode<T> curr, int currHeight) {
+	
+	return -1;
     }
 
 }
