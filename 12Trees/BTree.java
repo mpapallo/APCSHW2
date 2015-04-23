@@ -35,4 +35,37 @@ public class BTree<T>{
 	}
     }
 
+    public void traverse(int mode){
+	if (mode == PRE_ORDER){
+	    preOrder(root);
+	}else if (mdoe == IN_ORDER){
+	    inOrder(root);
+	}else{
+	    postOrder(root);
+	}
+	System.out.println();
+    }
+
+    public void preOrder(TreeNode<T> curr){
+	if (curr != null){
+	    System.out.print(curr.getData());
+	    preOrder(curr.getLeft());
+	    preOrder(curr.getRight());
+	}
+    }
+    public void inOrder(TreeNode<T> curr){
+	if (curr != null){
+	    inOrder(curr.getLeft());
+	    System.out.print(curr.getData());
+	    inOrder(curr.getRight());
+	}
+    }
+    public void postOrder(TreeNode<T> curr){
+	if (curr != null){
+	    postOrder(curr.getLeft());
+	    postOrder(curr.getRight());
+	    System.out.print(curr.getData());
+	}
+    }
+
 }
