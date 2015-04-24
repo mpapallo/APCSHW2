@@ -142,9 +142,11 @@ public class BTree<T>{
       
       ====================*/
     private String getLevel( TreeNode<E> curr, int level, int currLevel ) {
-	String ans = "";
-	
-	return ans;
+	if (currLevel == level){
+	    return "" + curr.getData() + " ";
+	}else{
+	    return getLevel(curr.getLeft(), level, currLevel + 1) + getLevel(curr.getRight(), level, currLevel + 1);
+	}
     }
     
     /*======== public String toString()) ==========
