@@ -115,16 +115,22 @@ public class BTree<T>{
       Wrapper for the recursive getHeight method
       ====================*/
     public int getHeight() {
-	return getHeight(root, 0);
+	return getHeight(root);
     }
     /*======== public int getHeight() ==========
       Inputs:   TreeNode<E> curr  
       Returns:  The height of the tree rooted at node curr
       
       ====================*/
-    public int getHeight(TreeNode<T> curr, int currHeight) {
-	
-	return -1;
+    public int getHeight(TreeNode<T> curr){
+	return getHeight(curr, 0);
+    }
+    private int getHeight(TreeNode<T> curr, int currHeight) {
+	if (curr == null){
+	    return currHeight;
+	}else{
+	    return Math.max(getHeight(curr.getLeft(), currHeight + 1), getHeight(curr.getRight(), currHeight + 1));
+	}
     }
 
     /*======== public String getLevel() ==========
@@ -136,7 +142,9 @@ public class BTree<T>{
       
       ====================*/
     private String getLevel( TreeNode<E> curr, int level, int currLevel ) {
-	return "";
+	String ans = "";
+	
+	return ans;
     }
     
     /*======== public String toString()) ==========
@@ -158,7 +166,8 @@ public class BTree<T>{
             3  4   5
       ====================*/
     public String toString() {
-	return "";
+	String ans = "";
+	return ans;
     }
 
 }
