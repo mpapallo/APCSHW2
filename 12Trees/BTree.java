@@ -169,6 +169,10 @@ public class BTree<T>{
       ====================*/
     public String toString() {
 	String ans = "";
+	int h = getHeight();
+	for (int l = 0; l < h; l ++){
+	    ans += getLevel(l); + "\n"
+	}
 	return ans;
     }
 
