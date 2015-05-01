@@ -57,7 +57,7 @@ public class BTree<T>{
     public void traverse(int mode){
 	if (mode == PRE_ORDER){
 	    preOrder(root);
-	}else if (mdoe == IN_ORDER){
+	}else if (mode == IN_ORDER){
 	    inOrder(root);
 	}else{
 	    postOrder(root);
@@ -141,7 +141,7 @@ public class BTree<T>{
                given level, ordered left -> right
       
       ====================*/
-    private String getLevel( TreeNode<E> curr, int level, int currLevel ) {
+    private String getLevel( TreeNode<T> curr, int level, int currLevel ) {
 	if (currLevel == level){
 	    return "" + curr.getData() + " ";
 	}else{
@@ -171,11 +171,7 @@ public class BTree<T>{
 	String ans = "";
 	int h = getHeight();
 	for (int l = 0; l < h; l ++){
-<<<<<<< HEAD
 	    ans += getLevel(l) + "\n";
-=======
-	    ans += getLevel(l); + "\n"
->>>>>>> 3bce26875444082d8130542421722f43ae89e448
 	}
 	return ans;
     }
