@@ -4,6 +4,7 @@ import java.util.*;
 public class BSTree <T extends Comparable> {
 
     private BSTreeNode<T> root;
+    private Random rand = new Random();
 
     public BSTree() {
 	root = null;
@@ -49,7 +50,8 @@ public class BSTree <T extends Comparable> {
       Wrapper for the recursive remove method
       ====================*/
     public void remove( T c ) {
-	root = remove( root, c );
+	BSTreeNode<T> compare = new BSTreeNode<T>(c);
+	root = remove( root, compare );
     }
 
     /*======== public BSTreeNode<T> remove() ==========
@@ -60,11 +62,64 @@ public class BSTree <T extends Comparable> {
       Should remove the value c from the tree rooted at
       curr, if it exists.
       ====================*/
-    private BSTreeNode<T> remove( BSTreeNode<T> curr, T c ) {
-	
-	return null;
+    private BSTreeNode<T> remove( BSTreeNode<T> curr, BSTreeNode<T> c ) {
+	if (curr == null){
+	    return curr;
+	}
+	if (c.compareTo(curr) < 0){ //c is less than curr
+	    curr.setLeft(remove(curr.getLeft(), c));
+	}else if (c.compareTo(curr) > 0){ //c is greater than curr
+	    curr.setRight(remove(curr.getRight(), c));
+	}else{
+	    if (curr.isLeaf()){
+		curr = null;
+	    }else if (curr.numChildren() == 1){
+		if (curr.getLeft() == null){
+		    curr.setData(getSucceeding(curr));
+		}else{
+		    curr.setData(getPreceeding(curr));
+		}
+	    }else{
+		int x = rand.nextInt(2);
+		if (x == 0){
+		    curr.setData(getSucceeding(curr));
+		}else{
+		    curr.setData(getPreceeding(curr));
+		}
+	    }
+	}
+	return curr;
     }
-
+    private T getPreceeding(BSTreeNode<T> curr){
+	if (curr.getLeft().isLeaf()){
+	    T data = curr.getLeft().getData();
+	    curr.setLeft(null);
+	    return data;
+	}else{
+	    BSTreeNode<T> r = curr.getLeft();
+	    while(r.getRight().getRight() != null){
+		r = r.getRight();
+	    }
+	    BSTreeNode<T> hold = r.getRight();
+	    r.setRight(null);
+	    return hold.getData();
+	}
+    }
+    private T getSucceeding(BSTreeNode<T> curr){
+	if (curr.getRight().isLeaf()){
+	    T data = curr.getRight().getData();
+	    curr.setRight(null);
+	    return data;
+	}else{
+	    BSTreeNode<T> l = curr.getRight();
+	    while(l.getLeft().getLeft() != null){
+		l = l.getLeft();
+	    }
+	    BSTreeNode<T> hold = l.getLeft();
+	    l.setLeft(null);
+	    return hold.getData();
+	}
+    }
 
     /*======== public void inOrder()) ==========
       Inputs:   
@@ -214,11 +269,16 @@ public class BSTree <T extends Comparable> {
 	tree.add("r");
 	tree.add("c");
 	tree.add("z");
+	tree.add("g");
 	System.out.println();
 	System.out.println(tree);
 	System.out.println();
 	tree.inOrder();
-	
+	System.out.println();
+
+	tree.remove("f");
+	System.out.println(tree);
+
     }
 
 }
