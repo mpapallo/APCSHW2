@@ -278,6 +278,8 @@ public class BSTree <T extends Comparable> {
 
 	tree.remove("f");
 	System.out.println(tree);
+	System.out.println();
+	tree.inOrder();
 
     }
 
