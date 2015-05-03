@@ -212,7 +212,9 @@ public class BSTree <T extends Comparable> {
 
    
     public static void main( String[] args ) {
-
+	BSTree<String> tree = new BSTree<String>();
+	
+	
     }
 
 }
