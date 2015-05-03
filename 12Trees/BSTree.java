@@ -36,11 +36,13 @@ public class BSTree <T extends Comparable> {
     private BSTreeNode<T> add(BSTreeNode<T> curr, BSTreeNode<T> t) {
 	if (curr == null){
 	    return t;
+	}else if (curr.compareTo(t) < 0){
+	    curr.setRight(add (curr.getRight(), t));
+	    return curr;
+	}else{
+	    curr.setLeft(add (curr.getLeft(),t));
+	    return curr;
 	}
-	//else if curr.compareTo(t) < 0 { }
-	//else if curr.compareTo(t) > 0 { }
-	//else (they are equal) { }
-	return null;
     }
 
     /*======== public void remove() ==========
@@ -62,6 +64,7 @@ public class BSTree <T extends Comparable> {
       curr, if it exists.
       ====================*/
     private BSTreeNode<T> remove( BSTreeNode<T> curr, T c ) {
+	
 	return null;
     }
 
