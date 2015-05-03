@@ -12,10 +12,7 @@ public class BSTree <T extends Comparable> {
     public boolean isEmpty() {
 	return root == null;
     }
-    public boolean isLeaf( BSTreeNode<T> t ) {
-	return (t.getLeft() == null && t.getRight() == null);
-    }
-
+    
     /*======== public void add() ==========
       Inputs:   T c  
       Returns: 
@@ -95,9 +92,7 @@ public class BSTree <T extends Comparable> {
 	inOrderHelper( t.getRight() );
     }
 
-
     ////////// DONATED BY DENNIS YATUNIN //////////
-
     public int getHeight(){
 	return getHeight(root);
     }
@@ -210,10 +205,11 @@ public class BSTree <T extends Comparable> {
 	return result;
     }
 
-   
     public static void main( String[] args ) {
 	BSTree<String> tree = new BSTree<String>();
 	
+	tree.add("a");
+	System.out.println(tree);
 	
     }
 

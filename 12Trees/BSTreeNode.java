@@ -27,8 +27,16 @@ public class BSTreeNode<T extends Comparable>{
 	return right;
     }
 
+    public boolean isLeaf(){
+	return getLeft() == null && getRight() == null;
+    }
+
     public int compareTo(BSTreeNode<T> o){
 	return getData().compareTo((T)o.getData());
+    }
+
+    public String toString(){
+	return "" + data;
     }
 
 }
