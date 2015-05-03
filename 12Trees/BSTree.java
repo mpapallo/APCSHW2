@@ -208,8 +208,16 @@ public class BSTree <T extends Comparable> {
     public static void main( String[] args ) {
 	BSTree<String> tree = new BSTree<String>();
 	
+	tree.add("m");
+	tree.add("f");
 	tree.add("a");
+	tree.add("r");
+	tree.add("c");
+	tree.add("z");
+	System.out.println();
 	System.out.println(tree);
+	System.out.println();
+	tree.inOrder();
 	
     }
 
