@@ -15,7 +15,7 @@ public class MyHeap{
 	return "papallo.michaela";
     }
 
-    private void swap(int a, int b){
+    public void swap(int a, int b){
 	//assumes a and b are in range
 	int temp = heap[a];
 	heap[a] = heap[b];
@@ -35,6 +35,7 @@ public class MyHeap{
 		//if it is greater than its parent, swap them (maxHeap)
 		swap(i, i / 2);
 	    }
+	    i = i /2;
 	}
     }
 
@@ -48,7 +49,26 @@ public class MyHeap{
 
     public String toString(){
 	String ret = "";
+	
+	//temp
+	ret += "[";
+	for (int i = 1; i <= heap[0]; i ++){
+	    ret += " " + heap[i];
+	}
+	ret += " ]";
+	
 	return ret;
+    }
+
+    public static void main(String[]args){
+	MyHeap h = new MyHeap();
+	
+	System.out.println(h);
+	h.add(3);
+	h.add(1);
+	h.add(5);
+	System.out.println(h);
+	
     }
 
 }
