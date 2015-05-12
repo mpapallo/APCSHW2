@@ -40,11 +40,28 @@ public class MyHeap{
     }
 
     public int remove(){
-	return 0;
+	int size = heap[0];
+	if (size == 0){
+	    //?
+	}else{
+	    int ret = heap[1];
+	    heap[1] = heap[size]; //replace root with last value
+	    heap[0] = size - 1; //reduce size
+	    //do the swap down thing
+	   
+	    
+
+	    return ret;
+	}
+	
     }
 
     public int peek(){
-	return 0;
+	if (heap[0] == 0){
+	    //?
+	}else{
+	    return heap[1];
+	}
     }
 
     public String toString(){
