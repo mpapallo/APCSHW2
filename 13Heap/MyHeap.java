@@ -8,7 +8,7 @@ public class MyHeap{
 	this(true);
     }
     public MyHeap(boolean isMax){
-	heap = new int[5];
+	heap = new int[10];
 	this.isMax = isMax;
     }
     
@@ -33,20 +33,29 @@ public class MyHeap{
 	return i / 2;
     }
 
-    public void add(int n){
+    private boolean inOrder(int a, int b){
+	//assumes a and b are in range
+	//a is parent, b is child
+	if (isMax){
+	    return (heap[a] > heap[b]); //for maxHeap, true if parent is greater
+	}else{
+	    return (heap[a] < heap[b]); //for minHeap, true if parent is less
+	}
+    }
 
+    public void add(int n){
 	if (heap[0] == heap.length - 1){
 	    resize();
 	}
-
 	int size = heap[0] + 1; //new size
 	heap[size] = n; //add int to the end of the values
 	heap[0] = size; //update size
-	int i = size;
+	swapUp(size);	
+    }
+    private void swapUp(int i){
 	while (getParent(i) > 0){ //while it has a parent
 	    int parentIn = getParent(i);
-	    if (heap[i] > heap[parentIn]){
-		//if it is greater than its parent, swap them (maxHeap)
+	    if (!inOrder(parentIn, i)){
 		swap(i, parentIn);
 	    }
 	    i = parentIn;
@@ -61,16 +70,19 @@ public class MyHeap{
 	    int ret = heap[1];
 	    heap[1] = heap[size]; //replace root with last value
 	    heap[0] = --size; //reduce size
-	    //do the swap down thing
-	    int i = 1;
-	    while (getLeft(i) <= size){ //while value has a left child
-		int l = getLeft(i);
-		int r = getRight(i);
-	        if (r <= size){ //if value has a right child
-		    if (heap[i] < heap[l] || heap[i] < heap[r]){
-			//if value is less than one of its children,
-			//swap with the bigger one (maxHeap)
-			int dif = heap[l] - heap[r];
+	    swapDown(1);
+	    return ret;
+	}	
+    }
+    private void swapDown(int i){
+	int size = heap[0];
+	while (getLeft(i) <= size){ //while value has a left child
+	    int l = getLeft(i);
+	    int r = getRight(i);
+	    if (r <= size){ //if value has a right child
+		if (!inOrder(i, l) || !inOrder(i, l)){
+		    int dif = heap[l] - heap[r];
+		    if (isMax){
 			if (dif > 0){
 			    swap(i, l);
 			    i = l;
@@ -79,18 +91,24 @@ public class MyHeap{
 			    i = r;
 			}
 		    }else{
-			return ret;
+			if (dif < 0){
+			    swap(i, l);
+			    i = l;
+			}else{
+			    swap(i, r);
+			    i = r;
+			}
 		    }
-		}else if (heap[i] < heap[l]){
-		    swap(i, l);
-		    i = l;
 		}else{
-		    return ret;
+		    return;
 		}
+	    }else if (!inOrder(i, l)){
+		swap(i, l);
+		i = l;
+	    }else{
+		return;
 	    }
-	    return ret;
 	}
-	
     }
 
     public int peek(){
