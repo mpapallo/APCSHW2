@@ -138,7 +138,6 @@ public class MyHeap{
 
     public static void main(String[]args){
 	MyHeap h = new MyHeap();
-	
 	System.out.println(h);
 	h.add(3);
 	h.add(1);
@@ -151,6 +150,19 @@ public class MyHeap{
 	System.out.println(h.remove());
 	System.out.println(h);
 	
+	System.out.println();
+	MyHeap j = new MyHeap(false);
+	j.add(3);
+	j.add(1);
+	j.add(5);
+	j.add(4);
+	j.add(7);
+	j.add(9);
+	j.add(1);
+	System.out.println(j);
+	System.out.println(j.remove());
+	System.out.println(j);
+
     }
 
 }
