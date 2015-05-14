@@ -8,7 +8,7 @@ public class MyHeap{
 	this(true);
     }
     public MyHeap(boolean isMax){
-	heap = new int[100];
+	heap = new int[5];
 	this.isMax = isMax;
     }
     
@@ -35,7 +35,9 @@ public class MyHeap{
 
     public void add(int n){
 
-	//////if heap[0]  = heap.length - 1, resize
+	if (heap[0] == heap.length - 1){
+	    resize();
+	}
 
 	int size = heap[0] + 1; //new size
 	heap[size] = n; //add int to the end of the values
@@ -97,6 +99,10 @@ public class MyHeap{
 	}else{
 	    return heap[1];
 	}
+    }
+
+    private void resize() {
+        heap = Arrays.copyOf(heap, heap[0] * 2);
     }
 
     public String toString(){
