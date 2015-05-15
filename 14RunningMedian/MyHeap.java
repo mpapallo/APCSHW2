@@ -123,6 +123,10 @@ public class MyHeap{
         heap = Arrays.copyOf(heap, heap[0] * 2);
     }
 
+    public int size(){
+	return heap[0];
+    }
+
     public String toString(){
 	String ret = "";
 	
