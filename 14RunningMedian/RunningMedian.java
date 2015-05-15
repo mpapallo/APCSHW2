@@ -1,5 +1,6 @@
 public class RunningMedian{
     
+    private MyHeap max, min;
     
     public RunningMedian(){
 	max = new MyHeap();
@@ -7,6 +8,7 @@ public class RunningMedian{
     }
 
     public double getMedian(){
+	return 0.0;
     }
     
     public void add(int n){
@@ -14,4 +16,3 @@ public class RunningMedian{
     }
     
 }
-
