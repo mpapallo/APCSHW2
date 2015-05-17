@@ -15,7 +15,7 @@ public class RunningMedian{
 	}else if (h1 < h2){
 	    return min.peek();
 	}else{
-	    return max.peek() + min.peek() / 2.0;
+	    return ( max.peek() + min.peek() ) / 2.0;
 	}
     }
     
@@ -43,6 +43,9 @@ public class RunningMedian{
 
 	med.add(2);
 	med.add(4);
+	med.add(5);
+	med.add(10);
+	med.add(-3);
 	System.out.println(med.getMedian());
 
     }
