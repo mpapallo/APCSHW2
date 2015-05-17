@@ -127,16 +127,30 @@ public class MyHeap{
 	return heap[0];
     }
 
-    public String toString(){
+  public String toString(){
 	String ret = "";
-	
+
+	/*
 	//temp
 	ret += "[";
 	for (int i = 1; i <= heap[0]; i ++){
 	    ret += " " + heap[i];
 	}
 	ret += " ]";
+	*/
 	
+	int numLevels = (int)(Math.log((double)heap[0]) / Math.log(2.0)) + 1;
+        System.out.println("numLevels: " + numLevels);
+	int index = 1;
+	for (int x = 0; x < numLevels; x ++){
+	    int thisLine = (int)Math.pow(2, x);
+	    for (int i = 0; i < thisLine; i ++){
+		ret += heap[index] + " ";
+		index ++;
+	    }
+	    ret += "\n";
+	}
+
 	return ret;
     }
 
