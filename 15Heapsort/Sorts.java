@@ -54,12 +54,5 @@ public class Sorts{
     private static int getParent(int i){
 	return i / 2 - 1;
     }
-
-    public static void main(String[]args){
-	int[] arr = new int[] {8, 9, 3, 1, 6, 4, 2, 7};
-	
-	Sorts.heapsort(arr);
-
-    }
     
 }
