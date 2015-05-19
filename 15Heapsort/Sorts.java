@@ -6,13 +6,13 @@ public class Sorts{
 	for (int i = arr.length - 1; i >= 0; i --){
 	    swapDown(arr, i, arr.length - 1);
 	}
-	System.out.println(Arrays.toString(arr));
+	//System.out.println(Arrays.toString(arr));
 	//step two: sort
 	for (int len = arr.length - 1; len >= 0; len --){
 	    swap(arr, 0, len);
-	    System.out.println(Arrays.toString(arr));
+	    //System.out.println(Arrays.toString(arr));
 	    swapDown(arr, 0, len - 1);
-	    System.out.println(Arrays.toString(arr));
+	    //System.out.println(Arrays.toString(arr));
 	}
     }
 
@@ -22,7 +22,7 @@ public class Sorts{
 	    int r = getRight(i);
 
 	    if (r <= size){ //if value has a right child
-		if (!inOrder(arr, i, l) || !inOrder(arr, i, l)){
+		if (!inOrder(arr, i, l) || !inOrder(arr, i, r)){
 		    int dif = arr[l] - arr[r];
 		    if (dif > 0){
 			swap(arr, i, l);
@@ -57,8 +57,5 @@ public class Sorts{
     private static int getRight(int i){
 	return i * 2 + 2;
     }
-    private static int getParent(int i){
-	return i / 2 - 1;
-    }
-    
+
 }
