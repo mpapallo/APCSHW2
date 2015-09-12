@@ -1,2 +1,2 @@
 # APCSHW2
-APCS with Mr. K, second term
+Stuyvesant APCS (Spring Term) with Mr. K
